@@ -35,16 +35,20 @@ public class SnesButton implements Drawable{
 		
 	}
 	
-	public void press(char input)
+	public boolean press(char input)
 	{
-		if(input == name || input == Character.toLowerCase(name))
-			press = true;
+		if(input != name && input != Character.toLowerCase(name))
+			return false;
+		press = true;
+		return true;
 	}
 	
-	public void release(char input)
+	public boolean release(char input)
 	{
-		if(input == name || input == Character.toLowerCase(name))
-			press = false;
+		if(input != name && input != Character.toLowerCase(name))
+			return false;
+		press = false;
+		return true;
 	}
 	
 	
@@ -57,5 +61,32 @@ public class SnesButton implements Drawable{
 	{
 		press = false;
 	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + name;
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SnesButton other = (SnesButton) obj;
+		if (name != other.name)
+			return false;
+		return true;
+	}
+	
+
+	
 	
 }

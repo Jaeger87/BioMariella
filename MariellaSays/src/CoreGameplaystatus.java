@@ -1,5 +1,5 @@
 
 public enum CoreGameplaystatus {
 
-	THINK ,SAYS, LISTEN
+	THINK ,SAYS, LISTEN, GAMEOVER
 }

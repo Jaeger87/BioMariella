@@ -12,8 +12,9 @@ public class MariellaSaysMain extends PApplet{
 	private List<SnesButton> buttons;
 	private Mariella mariella;
 	private CoreGameplaystatus coreStatus;
-	private List<Integer> currentSeuence;
-	private final static int TIMETOSAYS = 1000;
+	private List<Integer> currentSequence;
+	private final static int TIMETOSAYS = 1000;//millis
+	private final static int TIMETOPAUSE = 100;
 	
 	public static void main(String[] args) {
 		PApplet.main("MariellaSaysMain");
@@ -25,10 +26,10 @@ public class MariellaSaysMain extends PApplet{
 
     
     public void setup(){
-    	font = createFont("data/Legothick.ttf", 10);
+    	font = createFont("data/SNES_Italic.ttf", 10);
     	textFont(font);
     	
-    	drawBackground();
+    	drawCoreBackground();
         
         
         buttons = new ArrayList<>();
@@ -43,15 +44,16 @@ public class MariellaSaysMain extends PApplet{
      
     }
 
-    int saysIndex;
-    long nextStopSays;
-    
+    private int saysIndex;
+    private long nextStopSays;
+    private long nextStopPause;
+    private boolean pauseSays = false;
     
     int listenIndex;
     
     public void draw(){
     	
-    	drawBackground();
+    	drawCoreBackground();
     	//println(mouseX);
     	//println(mouseY);
     	for(SnesButton snesB : buttons)
@@ -64,39 +66,56 @@ public class MariellaSaysMain extends PApplet{
         switch(coreStatus)
         {
 		case LISTEN:
-			
+			if(listenIndex == currentSequence.size())
+				coreStatus = CoreGameplaystatus.THINK;
 			break;
 		case SAYS:
 		
-			if(saysIndex == currentSeuence.size())
+			if(saysIndex == currentSequence.size())
 			{
 				listenIndex = 0;
 				coreStatus = CoreGameplaystatus.LISTEN;
 				break;
 			}
-			SnesButton selected = buttons.get(currentSeuence.get(saysIndex));
+			SnesButton selected = buttons.get(currentSequence.get(saysIndex));
 			
 			long currentTime = millis();
 			
-			if(currentTime > nextStopSays)
+			if(pauseSays)
 			{
-				selected.release();
-				saysIndex++;
-				nextStopSays = millis() +  TIMETOSAYS;
-				break;
+				if(currentTime > nextStopPause)
+				{
+					println("asd");
+					nextStopSays = millis() +  TIMETOSAYS;
+					pauseSays = false;
+					saysIndex++;
+				}
 			}
+			else
+			{
+				if(currentTime > nextStopSays)
+				{
+					selected.release();
+					nextStopPause = millis() +  TIMETOPAUSE;
+					pauseSays = true;
+					break;
+				}
+				selected.press();
 			
-			selected.press();
+			}	
 			break;
 			
 		case THINK:
 			mariella.extendSequence();
-			currentSeuence = mariella.getSequence();
+			currentSequence = mariella.getSequence();
 			saysIndex = 0;
 			nextStopSays = millis() +  TIMETOSAYS;
+			pauseSays = false;
 			
 			coreStatus = CoreGameplaystatus.SAYS;
-			
+			break;
+		case GAMEOVER:
+			println("Game over!");
 			break;
 		default:
 			break;
@@ -106,11 +125,11 @@ public class MariellaSaysMain extends PApplet{
         
     }
     
-    private void drawBackground()
+    private void drawCoreBackground()
     {
     	background(240);
         fill(85,94,109);
-        ellipse(500,350,450,450);
+        ellipse(500,350,490,490);
         
         pushMatrix();
         int xFirstRect = 122;
@@ -121,6 +140,12 @@ public class MariellaSaysMain extends PApplet{
         
         rect(xFirstRect - 10, yFirstRect + 130, 340, 80, 300);
         popMatrix();
+        
+        text("Y", 275, 372);
+        text("B", 319, 496);
+        text("A", 684, 323);
+        text("X", 628, 210);
+        
     }
     
     public void keyPressed()
@@ -130,11 +155,23 @@ public class MariellaSaysMain extends PApplet{
     			snesB.press(key);
     }
       
-    public void keyReleased()//qui condizione gameOver
+    public void keyReleased()
     {
     	if(coreStatus == CoreGameplaystatus.LISTEN)
+    	{
+    		SnesButton released = null;
     		for(SnesButton snesB : buttons)
-    			snesB.release(key);
+    			if(snesB.release(key))
+    			{
+    				released = snesB;
+    				break;
+    			}
+    		if(!buttons.get(currentSequence.get(listenIndex)).equals(released))
+    			coreStatus = CoreGameplaystatus.GAMEOVER;
+    		else
+    			listenIndex++;
+    	}
+    	
     }
     
     
