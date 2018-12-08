@@ -1,20 +1,12 @@
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 import processing.core.PApplet;
-import processing.core.PFont;
 
-public class MariellaSaysMain extends PApplet{
+public class CoreGameplay implements PScreen{
 
-	private PFont font;
-	private PScreen currentScreen;
-	private PScreen logInScreen;
-	private PScreen registrationScreen;
-	private PScreen coreScreen;
-	private PScreen gameOverScreen;
 	
+	private PApplet parent;
 	private List<SnesButton> buttons;
 	private Mariella mariella;
 	private CoreGameplaystatus coreStatus;
@@ -22,56 +14,59 @@ public class MariellaSaysMain extends PApplet{
 	private final static int TIMETOSAYS = 1000;//millis
 	private final static int TIMETOPAUSE = 100;
 	
-	public static void main(String[] args) {
-		PApplet.main("MariellaSaysMain");
+    private int saysIndex;
+    private long nextStopSays;
+    private long nextStopPause;
+    private boolean pauseSays;
+	
+    int listenIndex;
+    
+    
+	public CoreGameplay(PApplet parent) {
+		super();
+		this.parent = parent;
 	}
 
-    public void settings(){
-        size(1000,700);
-    }
-
-    
-    public void setup(){
-    	font = createFont("data/SNES_Italic.ttf", 10);
-    	textFont(font);
-    	
-    	coreScreen = new CoreGameplay(this);
-    	
-    	changeScreen(coreScreen);
-    	
-    	drawCoreBackground();
+	
+	
+	@Override
+	public void setup() {
+		drawCoreBackground();
         
         
         buttons = new ArrayList<>();
     	
-    	buttons.add(new SnesButton(this, color(0,255,0), color(15,160,15), 352, 336, 'Y'));
-    	buttons.add(new SnesButton(this, color(0,0,255), color(20,20,160), 584, 218, 'X'));
-    	buttons.add(new SnesButton(this, color(255,0,0), color(160, 15,15), 634, 338, 'A'));
-    	buttons.add(new SnesButton(this, color(255,255,0), color(160,160,15), 402, 457, 'B'));
+    	buttons.add(new SnesButton(parent, parent.color(0,255,0),
+    			parent.color(0,160,0), 352, 336, 'Y'));//verde
+    	buttons.add(new SnesButton(parent, parent.color(0,0,255), 
+    			parent.color(0,0,160), 584, 218, 'X'));//blu
+    	buttons.add(new SnesButton(parent, parent.color(255,0,0), 
+    			parent.color(160, 0,0), 634, 338, 'A'));//rosso
+    	buttons.add(new SnesButton(parent, parent.color(255,255,0), 
+    			parent.color(160,160,0), 402, 457, 'B'));//giallo
     	
     	mariella = new Mariella();
     	coreStatus = CoreGameplaystatus.THINK;
-     
-    }
-
-    private int saysIndex;
-    private long nextStopSays;
-    private long nextStopPause;
-    private boolean pauseSays = false;
-    
-    int listenIndex;
-    
-    public void draw(){
     	
-    	drawCoreBackground();
+    	saysIndex = 0;
+    	nextStopSays = 0;
+    	nextStopPause = 0;
+    	pauseSays = false;
+    	
+    	listenIndex = 0;
+    	
+	}
+
+	@Override
+	public void draw() {
+		drawCoreBackground();
     	//println(mouseX);
     	//println(mouseY);
     	for(SnesButton snesB : buttons)
     		snesB.display();
     	
-        textSize(65);
-        fill(10);
-        text(mariella.getScore(), width/2 - 50, height / 10);
+
+    	writeScore();
         
         switch(coreStatus)
         {
@@ -89,13 +84,13 @@ public class MariellaSaysMain extends PApplet{
 			}
 			SnesButton selected = buttons.get(currentSequence.get(saysIndex));
 			
-			long currentTime = millis();
+			long currentTime = parent.millis();
 			
 			if(pauseSays)
 			{
 				if(currentTime > nextStopPause)
 				{
-					nextStopSays = millis() +  TIMETOSAYS;
+					nextStopSays = parent.millis() +  TIMETOSAYS;
 					pauseSays = false;
 					saysIndex++;
 				}
@@ -105,7 +100,7 @@ public class MariellaSaysMain extends PApplet{
 				if(currentTime > nextStopSays)
 				{
 					selected.release();
-					nextStopPause = millis() +  TIMETOPAUSE;
+					nextStopPause = parent.millis() +  TIMETOPAUSE;
 					pauseSays = true;
 					break;
 				}
@@ -118,57 +113,61 @@ public class MariellaSaysMain extends PApplet{
 			mariella.extendSequence();
 			currentSequence = mariella.getSequence();
 			saysIndex = 0;
-			nextStopSays = millis() +  TIMETOSAYS;
+			nextStopSays = parent.millis() +  TIMETOSAYS;
 			pauseSays = false;
 			
 			coreStatus = CoreGameplaystatus.SAYS;
 			break;
 		case GAMEOVER:
-			println("Game over!");
+			PApplet.println("Game over!");
 			break;
 		default:
 			break;
         
         }
-        
-        
-    }
-    
+	}
+	
+	
+	
+	
+	
     private void drawCoreBackground()
     {
-    	background(240);
-        fill(85,94,109);
-        ellipse(500,350,490,490);
+    	parent.background(240);
+    	parent.fill(85,94,109);
+    	parent.ellipse(500,350,490,490);
         
-        pushMatrix();
+    	parent.pushMatrix();
         int xFirstRect = 122;
         int yFirstRect = 420;
-        rotate(radians(-27));
-        fill(210);
-        rect(xFirstRect, yFirstRect, 340, 80, 300);
+        parent.rotate(PApplet.radians(-27));
+        parent.fill(210);
+        parent.rect(xFirstRect, yFirstRect, 340, 80, 300);
         
-        rect(xFirstRect - 10, yFirstRect + 130, 340, 80, 300);
-        popMatrix();
+        parent.rect(xFirstRect - 10, yFirstRect + 130, 340, 80, 300);
+        parent.popMatrix();
         
-        text("Y", 275, 372);
-        text("B", 319, 496);
-        text("A", 684, 323);
-        text("X", 628, 210);
+        parent.text("Y", 275, 372);
+        parent.text("B", 319, 496);
+        parent.text("A", 684, 323);
+        parent.text("X", 628, 210);
         
     }
+	
     
-    
-    private void changeScreen(PScreen screen)
+    private void writeScore()
     {
-    	currentScreen = screen;
-    	screen.setup();
+        parent.textSize(65);
+        parent.fill(10);
+        parent.text(mariella.getScore(), parent.width/2 - 50, parent.height / 10);
     }
-    
+	
+	
     public void keyPressed()
     {
     	if(coreStatus == CoreGameplaystatus.LISTEN)
     		for(SnesButton snesB : buttons)
-    			snesB.press(key);
+    			snesB.press(parent.key);
     }
       
     public void keyReleased()
@@ -177,7 +176,7 @@ public class MariellaSaysMain extends PApplet{
     	{
     		SnesButton released = null;
     		for(SnesButton snesB : buttons)
-    			if(snesB.release(key))
+    			if(snesB.release(parent.key))
     			{
     				released = snesB;
     				break;
@@ -189,6 +188,11 @@ public class MariellaSaysMain extends PApplet{
     	}
     	
     }
-    
-    
+	
+	
+	
+	
+	
+	
+
 }
