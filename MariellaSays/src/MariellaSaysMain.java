@@ -26,8 +26,10 @@ public class MariellaSaysMain extends PApplet{
     	textFont(font);
     	
     	coreScreen = new CoreGameplay(this);
+    	logInScreen = new LogInScreen(this);
     	gameOverScreen = new GameOver(this);
-    	changeScreen(coreScreen);
+    	registrationScreen = new RegistrationScreen(this);
+    	changeScreen(logInScreen);
     }
     
     public void draw(){
@@ -43,7 +45,8 @@ public class MariellaSaysMain extends PApplet{
     
     public void keyPressed()
     {
-    	currentScreen.keyPressed();    }
+    	currentScreen.keyPressed();    
+    }
       
     public void keyReleased()
     {
@@ -58,6 +61,17 @@ public class MariellaSaysMain extends PApplet{
     public void startMariella()
     {
     	changeScreen(coreScreen);
+    }
+    
+    public void logIn()
+    {
+    	changeScreen(logInScreen);
+    }
+    
+    
+    public void registration()
+    {
+    	changeScreen(registrationScreen);
     }
     
 }

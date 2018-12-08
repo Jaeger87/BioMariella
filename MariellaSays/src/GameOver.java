@@ -35,7 +35,7 @@ public class GameOver implements PScreen{
 	@Override
 	public void keyReleased() {
 		if(parent.key == MariellaSaysMain.ENTER)
-			parent.startMariella();
+			parent.logIn();
 		
 	}
 
