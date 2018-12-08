@@ -6,7 +6,7 @@ import processing.core.PApplet;
 public class CoreGameplay implements PScreen{
 
 	
-	private PApplet parent;
+	private MariellaSaysMain parent;
 	private List<SnesButton> buttons;
 	private Mariella mariella;
 	private CoreGameplaystatus coreStatus;
@@ -22,7 +22,7 @@ public class CoreGameplay implements PScreen{
     int listenIndex;
     
     
-	public CoreGameplay(PApplet parent) {
+	public CoreGameplay(MariellaSaysMain parent) {
 		super();
 		this.parent = parent;
 	}
@@ -119,7 +119,7 @@ public class CoreGameplay implements PScreen{
 			coreStatus = CoreGameplaystatus.SAYS;
 			break;
 		case GAMEOVER:
-			PApplet.println("Game over!");
+			parent.gameOver();
 			break;
 		default:
 			break;
