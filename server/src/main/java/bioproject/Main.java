@@ -42,6 +42,12 @@ public class Main {
         	
         });
         
+        //get global scores
+        get("/ranking", (req, res)->{
+        	res.type("/application/json");
+        	return new Gson().toJson(UsersBLL.getRanking());
+        });
+        
         
         
         

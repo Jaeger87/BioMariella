@@ -3,19 +3,23 @@ package bioproject.dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import bioproject.types.User;
 
 
 public class UsersTableDAL extends AbstractTableDAL{
 
 	private static final String querySelectWhereID = 
-			"SELECT id, username from users where id =?";
+			"SELECT * FROM users where id =?";
 	private static final String queryInsert = 
 			"INSERT INTO users (id, username, score) VALUES (?, ?, ?);";
 	private static final String queryUpdateScore =
 			"UPDATE users SET score = ? WHERE users.id = ?";
 	private static final String queryGetScore = 
 			"SELECT score FROM users WHERE id = ?";
+	private static final String queryGetAllUsers =
+			"SELECT * FROM users";
 	
 	public User getUser(String id)
 	{
@@ -40,6 +44,30 @@ public class UsersTableDAL extends AbstractTableDAL{
 			return null;
 		}
 		
+	}
+	
+	public List<User> getAllUsers()
+	{
+		List<User> users = new ArrayList<>();
+		try {
+			PreparedStatement stmt =
+			        getConnection().prepareStatement(queryGetAllUsers);
+		    ResultSet rs = stmt.executeQuery();
+		    while (rs.next())
+		    {
+		       User u = new User();
+		       u.setID(rs.getString(1));
+		       u.setUsername(rs.getString(2));
+		       u.setScore(Integer.parseInt(rs.getString(3)));
+		       users.add(u);
+		    }
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		return users;
 	}
 	
 	public boolean insert(User u)
@@ -83,5 +111,7 @@ public class UsersTableDAL extends AbstractTableDAL{
 		}
 		return true;
 	}
+	
+	
 	
 }

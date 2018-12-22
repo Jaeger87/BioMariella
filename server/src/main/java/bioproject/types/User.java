@@ -1,6 +1,6 @@
 package bioproject.types;
 
-public class User {
+public class User implements Comparable{
 
 	private String ID;
 	private String username;
@@ -33,6 +33,15 @@ public class User {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	@Override
+	public int compareTo(Object anotherUser) {
+		// TODO Auto-generated method stub
+		User user = (User) anotherUser;
+		if(getScore() < user.getScore()) return 1;
+		else if (getScore() == user.getScore()) return 0;
+		return -1;
 	}
 
 }

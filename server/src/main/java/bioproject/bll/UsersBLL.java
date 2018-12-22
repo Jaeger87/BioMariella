@@ -1,5 +1,8 @@
 package bioproject.bll;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
 
 import bioproject.dal.UsersTableDAL;
@@ -12,6 +15,15 @@ public class UsersBLL {
 		try(UsersTableDAL utd = new UsersTableDAL())
 		{
 			return utd.getUser(id);
+		}
+	}
+	
+	public static List<User> getRanking(){
+		try(UsersTableDAL utd = new UsersTableDAL())
+		{
+			List<User> users = utd.getAllUsers();
+			Collections.sort(users);
+			return users;
 		}
 	}
 	
@@ -34,7 +46,8 @@ public class UsersBLL {
 		}
 	}
 	
-	public static boolean updateScore(String id, int newScore) {
+	public static boolean updateScore(String id, int newScore) 
+	{
 		User u = getUser(id);
 		try(UsersTableDAL utd = new UsersTableDAL())
 		{
