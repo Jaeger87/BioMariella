@@ -35,8 +35,10 @@ public class UsersBLL {
 		return true;
 	}
 	
-	public static boolean insertUser(User u)
+	public static boolean insertUser(String username)
 	{
+		User u = new User();
+		u.setUsername(username);
 		u.setScore(0);
 		UUID uuid = UUID.randomUUID();
 		u.setID(uuid.toString());
