@@ -1,5 +1,5 @@
 USAGE:
-1) istallare pgAdmin https://www.pgadmin.org/download/
+1) installare pgAdmin https://www.pgadmin.org/download/
 2) scaricare il file DBscript
 3) creare un database su pgAdmin chiamato "postgres" (right click su Server > PostgreSQL > Databases )
 4) aprire il database e right click su Schemas > public
