@@ -30,7 +30,6 @@ for root, dirs, files in os.walk(image_dir):
         if file.endswith("png") or file.endswith("jpg"):
             path = os.path.join(root, file)
             label = os.path.basename(root).replace(" ", "-").lower()
-            #print(label, path)
 
             if label in label_ids:
                 pass
@@ -38,16 +37,11 @@ for root, dirs, files in os.walk(image_dir):
                 label_ids[label] = current_id
                 current_id += 1
             id_ = label_ids[label]
-            #print(label_ids)
-
-            #y_labels.append(label)
-            #x_train.append(path)
 
             pil_image = Image.open(path).convert("L") #grayscale
             #size = (550, 550)
             #finalImage = pil_image.resize(size, Image.ANTIALIAS )
             image_array = np.array(pil_image, "uint8")
-            #print(image_array)
             
             #we pass directly the roi so is useless to recompute it
             #faces = face_cascade.detectMultiScale(image_array, scaleFactor = 1.5, minNeighbors = 5)
