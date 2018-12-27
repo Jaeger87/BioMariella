@@ -1,6 +1,11 @@
+/CoreGameplay.class
 /CoreGameplaystatus.class
 /Drawable.class
+/GameOver.class
+/LogInScreen.class
 /Mariella.class
 /MariellaSaysMain.class
 /NormalButton.class
+/PScreen.class
+/RegistrationScreen.class
 /SnesButton.class
