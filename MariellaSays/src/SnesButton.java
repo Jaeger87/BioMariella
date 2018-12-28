@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.serial.Serial;
 
 public class SnesButton implements Drawable{
 
@@ -10,10 +11,13 @@ public class SnesButton implements Drawable{
 	private char name;
 	private final static int radius = 70;
 	private PApplet parent;
+	private Serial arduino;
 	private boolean press = false;
+	private char color;
+	private static final char DARK = 'D';
 	
-	
-	public SnesButton(PApplet parent, int pressColor, int normalColor, int x, int y, char name) 
+	public SnesButton(PApplet parent, Serial arduino, int pressColor, int normalColor,
+			int x, int y, char name, char color) 
 	{
 		this.parent = parent;
 		this.pressColor = pressColor;
@@ -21,13 +25,18 @@ public class SnesButton implements Drawable{
 		this.x = x;
 		this.y = y;
 		this.name = name;
+		this.arduino = arduino;
+		this.color = color;
 	}
 
 
 	@Override
 	public void display() {
 		if(press)
+		{
 			parent.fill(pressColor);
+			
+		}
 		else
 			parent.fill(normalColor);
 		parent.strokeWeight(2);
@@ -39,7 +48,7 @@ public class SnesButton implements Drawable{
 	{
 		if(input != name && input != Character.toLowerCase(name))
 			return false;
-		press = true;
+		press();
 		return true;
 	}
 	
@@ -47,19 +56,25 @@ public class SnesButton implements Drawable{
 	{
 		if(input != name && input != Character.toLowerCase(name))
 			return false;
-		press = false;
+		release();
 		return true;
 	}
 	
 	
 	public void press()
 	{
+		if(!press)
+			arduino.write(color);
 		press = true;
+		
 	}
 	
 	public void release()
 	{
+		if(press)
+			arduino.write(DARK);
 		press = false;
+		
 	}
 
 
@@ -84,6 +99,11 @@ public class SnesButton implements Drawable{
 		if (name != other.name)
 			return false;
 		return true;
+	}
+
+
+	public boolean isPress() {
+		return press;
 	}
 	
 

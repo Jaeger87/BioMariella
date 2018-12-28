@@ -26,53 +26,61 @@ const uint32_t GREEN = strip.Color(0, 60, 0);
 const uint32_t BLU = strip.Color(0, 0, 60);
 const uint32_t YELLOW = strip.Color(60, 60, 0);
 const uint32_t WHITE = strip.Color(100, 100, 100);
+const uint32_t DARK = strip.Color(0, 0, 0);
 
 
 void setup() {
 
-  Serial.begin(9600);
-  Serial.setTimeout(40);
+  Serial.begin(115200);
+ // Serial.setTimeout(20);
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
 }
 
 void loop() {
-  String message = Serial.readStringUntil('\n');
-  if (message.length() > 0)
-  {
-    switch (message.charAt(0))
+  if (Serial.available()) {
+    char message = Serial.read();
+    if (message != 0)
     {
-      case 'R':
-        setColorStrip(RED);
-        break;
-      case 'G':
-        setColorStrip(GREEN);
-        break;
 
-      case 'B':
-        setColorStrip(BLU);
-        break;
+      Serial.println(message);
+      switch (message)
+      {
+        case 'R':
+          setColorStrip(RED);
+          break;
+        case 'G':
+          setColorStrip(GREEN);
 
-      case 'Y':
-        setColorStrip(YELLOW);
-        break;
-      case 'W':
-        setColorStrip(WHITE);
-        break;
+          break;
 
-      default:
-        break;
+        case 'B':
+          setColorStrip(BLU);
+          break;
+
+        case 'Y':
+          setColorStrip(YELLOW);
+          break;
+        case 'W':
+          setColorStrip(WHITE);
+          break;
+
+        case 'D':
+          setColorStrip(DARK);
+          break;
+        default:
+          break;
+      }
+
     }
-
   }
-
   //setColorStrip(WHITE);
-  delay(50);
+  delay(10);
 }
 
 void setColorStrip(uint32_t color)
 {
-  for (int i = 0; i < 60; i++)
+  for (int i = 0; i < strip.numPixels(); i++)
     strip.setPixelColor(i, color);
   strip.show();
 }

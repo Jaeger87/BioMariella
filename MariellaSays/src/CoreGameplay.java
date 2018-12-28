@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import processing.core.PApplet;
+import processing.serial.Serial;
 
 public class CoreGameplay implements PScreen{
 
@@ -21,10 +22,12 @@ public class CoreGameplay implements PScreen{
 	
     int listenIndex;
     
+    private Serial arduino;
     
-	public CoreGameplay(MariellaSaysMain parent) {
+	public CoreGameplay(MariellaSaysMain parent, Serial arduino) {
 		super();
 		this.parent = parent;
+		this.arduino = arduino;
 	}
 
 	
@@ -36,14 +39,14 @@ public class CoreGameplay implements PScreen{
         
         buttons = new ArrayList<>();
     	
-    	buttons.add(new SnesButton(parent, parent.color(0,255,0),
-    			parent.color(0,160,0), 352, 336, 'Y'));//verde
-    	buttons.add(new SnesButton(parent, parent.color(0,0,255), 
-    			parent.color(0,0,160), 584, 218, 'X'));//blu
-    	buttons.add(new SnesButton(parent, parent.color(255,0,0), 
-    			parent.color(160, 0,0), 634, 338, 'A'));//rosso
-    	buttons.add(new SnesButton(parent, parent.color(255,255,0), 
-    			parent.color(160,160,0), 402, 457, 'B'));//giallo
+    	buttons.add(new SnesButton(parent, arduino, parent.color(0,255,0),
+    			parent.color(0,160,0), 352, 336, 'Y', 'G'));//verde
+    	buttons.add(new SnesButton(parent, arduino, parent.color(0,0,255), 
+    			parent.color(0,0,160), 584, 218, 'X', 'B'));//blu
+    	buttons.add(new SnesButton(parent, arduino, parent.color(255,0,0), 
+    			parent.color(160, 0,0), 634, 338, 'A', 'R'));//rosso
+    	buttons.add(new SnesButton(parent, arduino, parent.color(255,255,0), 
+    			parent.color(160,160,0), 402, 457, 'B', 'Y'));//giallo
     	
     	mariella = new Mariella();
     	coreStatus = CoreGameplaystatus.THINK;
@@ -104,6 +107,7 @@ public class CoreGameplay implements PScreen{
 					pauseSays = true;
 					break;
 				}
+
 				selected.press();
 			
 			}	
