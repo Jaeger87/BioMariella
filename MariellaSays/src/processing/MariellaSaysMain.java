@@ -1,7 +1,13 @@
+package processing;
 
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.serial.*;
+import screens.CoreGameplay;
+import screens.GameOver;
+import screens.LogInScreen;
+import screens.PScreen;
+import screens.RegistrationScreen;
 
 public class MariellaSaysMain extends PApplet {
 
@@ -13,10 +19,10 @@ public class MariellaSaysMain extends PApplet {
 	private PScreen gameOverScreen;
 	
 
-	private Serial arduino;
+	private SerialContainer arduino;
 
 	public static void main(String[] args) {
-		PApplet.main("MariellaSaysMain");
+		PApplet.main("processing.MariellaSaysMain");
 	}
 
 	public void settings() {
@@ -27,10 +33,15 @@ public class MariellaSaysMain extends PApplet {
 		font = createFont("data/SNES_Italic.ttf", 10);
 		textFont(font);
 
-		String portName = Serial.list()[0];
+		
 		for (String port : Serial.list())
 			println(port);
-		arduino = new Serial(this, portName, 115200);
+		
+		if(Serial.list().length > 0)
+			arduino = new SerialContainer(new Serial(this, Serial.list()[0], 115200));
+		else
+			arduino = new SerialContainer();
+		
 
 		
 		coreScreen = new CoreGameplay(this, arduino);

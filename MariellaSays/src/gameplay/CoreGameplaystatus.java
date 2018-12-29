@@ -1,3 +1,4 @@
+package gameplay;
 
 public enum CoreGameplaystatus {
 

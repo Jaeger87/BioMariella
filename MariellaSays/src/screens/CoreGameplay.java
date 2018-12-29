@@ -1,8 +1,13 @@
+package screens;
 import java.util.ArrayList;
 import java.util.List;
 
+import gameplay.CoreGameplaystatus;
+import gameplay.Mariella;
+import gameplay.SnesButton;
+import processing.MariellaSaysMain;
+import processing.SerialContainer;
 import processing.core.PApplet;
-import processing.serial.Serial;
 
 public class CoreGameplay implements PScreen{
 
@@ -22,9 +27,9 @@ public class CoreGameplay implements PScreen{
 	
     int listenIndex;
     
-    private Serial arduino;
+    private SerialContainer arduino;
     
-	public CoreGameplay(MariellaSaysMain parent, Serial arduino) {
+	public CoreGameplay(MariellaSaysMain parent, SerialContainer arduino) {
 		super();
 		this.parent = parent;
 		this.arduino = arduino;

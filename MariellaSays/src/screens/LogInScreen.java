@@ -1,3 +1,5 @@
+package screens;
+import processing.MariellaSaysMain;
 
 public class LogInScreen implements PScreen{
 

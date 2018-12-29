@@ -1,3 +1,4 @@
+package screens;
 
 public interface PScreen {
 

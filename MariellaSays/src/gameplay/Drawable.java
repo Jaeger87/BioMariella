@@ -1,3 +1,4 @@
+package gameplay;
 
 public interface Drawable {
 

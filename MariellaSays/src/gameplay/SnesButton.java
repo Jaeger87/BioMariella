@@ -1,5 +1,6 @@
+package gameplay;
+import processing.SerialContainer;
 import processing.core.PApplet;
-import processing.serial.Serial;
 
 public class SnesButton implements Drawable{
 
@@ -11,12 +12,12 @@ public class SnesButton implements Drawable{
 	private char name;
 	private final static int radius = 70;
 	private PApplet parent;
-	private Serial arduino;
+	private SerialContainer arduino;
 	private boolean press = false;
 	private char color;
 	private static final char DARK = 'D';
 	
-	public SnesButton(PApplet parent, Serial arduino, int pressColor, int normalColor,
+	public SnesButton(PApplet parent, SerialContainer arduino, int pressColor, int normalColor,
 			int x, int y, char name, char color) 
 	{
 		this.parent = parent;

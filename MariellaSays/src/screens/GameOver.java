@@ -1,3 +1,6 @@
+package screens;
+import processing.MariellaSaysMain;
+
 public class GameOver implements PScreen{
 
 	private MariellaSaysMain parent;

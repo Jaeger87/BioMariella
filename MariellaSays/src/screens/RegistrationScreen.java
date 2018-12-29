@@ -1,5 +1,7 @@
+package screens;
 import interfascia.GUIController;
 import interfascia.IFTextField;
+import processing.MariellaSaysMain;
 
 public class RegistrationScreen implements PScreen{
 
