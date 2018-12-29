@@ -45,6 +45,6 @@ for (x, y, w, h) in faces:
 	#a detected face must have at least 2 eyes
 	if flagEyes >= 2:
 		id_, theta = recognizer.predict(roi_gray)
-		if theta>= 50 and theta <= 70 :
+		if theta<= 30:
 			name = labels[id_]
 			print(name)
