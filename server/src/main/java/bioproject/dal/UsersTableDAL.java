@@ -10,31 +10,31 @@ import bioproject.types.User;
 
 public class UsersTableDAL extends AbstractTableDAL{
 
-	private static final String querySelectWhereID = 
-			"SELECT * FROM users where id =?";
+	private static final String querySelect = 
+			"SELECT * FROM users where username =?";
 	private static final String queryInsert = 
-			"INSERT INTO users (id, username, score) VALUES (?, ?, ?);";
+			"INSERT INTO users (username, score) VALUES (?, ?);";
 	private static final String queryUpdateScore =
-			"UPDATE users SET score = ? WHERE users.id = ?";
+			"UPDATE users SET score = ? WHERE users.username = ?";
 	private static final String queryGetScore = 
-			"SELECT score FROM users WHERE id = ?";
+			"SELECT score FROM users WHERE username = ?";
 	private static final String queryGetAllUsers =
 			"SELECT * FROM users";
 	
-	public User getUser(String id)
+	public User getUser(String username)
 	{
 		try {
 			User u = new User();
 			PreparedStatement stmt =
-			        getConnection().prepareStatement(querySelectWhereID);
+			        getConnection().prepareStatement(querySelect);
 
-		    stmt.setString(1, id);
+		    stmt.setString(1, username);
 		    ResultSet rs = stmt.executeQuery();
 		    while (rs.next())
 		    {
 		       u = new User();
-		       u.setID(rs.getString(1));
-		       u.setUsername(rs.getString(2));
+		       u.setUsername(rs.getString(1));
+		       u.setScore(rs.getInt(2));
 		    }
 		return u;
 	}
@@ -56,9 +56,8 @@ public class UsersTableDAL extends AbstractTableDAL{
 		    while (rs.next())
 		    {
 		       User u = new User();
-		       u.setID(rs.getString(1));
-		       u.setUsername(rs.getString(2));
-		       u.setScore(Integer.parseInt(rs.getString(3)));
+		       u.setUsername(rs.getString(1));
+		       u.setScore(Integer.parseInt(rs.getString(2)));
 		       users.add(u);
 		    }
 		}
@@ -74,11 +73,10 @@ public class UsersTableDAL extends AbstractTableDAL{
 	{
 		try {
 			PreparedStatement stmt =
-			        getConnection().prepareStatement( queryInsert);
+			        getConnection().prepareStatement(queryInsert);
 
-		    stmt.setString(1, u.getId());
-		    stmt.setString(2, u.getUserName());
-		    stmt.setInt(3, 0);
+		    stmt.setString(1, u.getUserName());
+		    stmt.setInt(2, 0);
 		    stmt.executeUpdate();
 		    return true;
 		} catch (SQLException e) {
@@ -87,11 +85,11 @@ public class UsersTableDAL extends AbstractTableDAL{
 		}
 	}
 	
-	public boolean updateScore(User u, int newScore) {
+	public boolean updateScore(String username, int newScore) {
 		try {
 			PreparedStatement stmt = 
 					this.getConnection().prepareStatement(queryGetScore);
-			stmt.setString(1, u.getId());
+			stmt.setString(1, username);
 			ResultSet rs = stmt.executeQuery();
 			int score = 0;
 			while (rs.next())
@@ -102,7 +100,7 @@ public class UsersTableDAL extends AbstractTableDAL{
 			PreparedStatement stmt2 = 
 					this.getConnection().prepareStatement(queryUpdateScore);
 			stmt2.setInt(1, newScore);
-			stmt2.setString(2, u.getId());
+			stmt2.setString(2, username);
 			stmt2.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

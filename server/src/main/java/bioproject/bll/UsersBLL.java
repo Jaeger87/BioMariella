@@ -10,11 +10,11 @@ import bioproject.types.User;
 
 public class UsersBLL {
 
-	public static User getUser(String id)
+	public static User getUser(String username)
 	{
 		try(UsersTableDAL utd = new UsersTableDAL())
 		{
-			return utd.getUser(id);
+			return utd.getUser(username);
 		}
 	}
 	
@@ -27,9 +27,9 @@ public class UsersBLL {
 		}
 	}
 	
-	public static boolean alreadyExist(String id)
+	public static boolean alreadyExist(String username)
 	{
-		User u = getUser(id);
+		User u = getUser(username);
 		if(u == null || u.getUserName() == null)
 			return false;
 		return true;
@@ -40,20 +40,18 @@ public class UsersBLL {
 		User u = new User();
 		u.setUsername(username);
 		u.setScore(0);
-		UUID uuid = UUID.randomUUID();
-		u.setID(uuid.toString());
 		try(UsersTableDAL utd = new UsersTableDAL())
 		{
 			return utd.insert(u);
 		}
 	}
 	
-	public static boolean updateScore(String id, int newScore) 
+	public static boolean updateScore(String username, int newScore) 
 	{
-		User u = getUser(id);
+		if(!alreadyExist(username)) return false;
 		try(UsersTableDAL utd = new UsersTableDAL())
 		{
-			return utd.updateScore(u, newScore);
+			return utd.updateScore(username, newScore);
 		}
 	}
 }

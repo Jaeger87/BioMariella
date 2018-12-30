@@ -35,5 +35,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib"/>
+	<classpathentry kind="lib" path="lib/json-20180813.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

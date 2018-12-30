@@ -31,10 +31,16 @@
     	<version>9.4-1201-jdbc41</version> 
 	</dependency>
 	<dependency>
-    <groupId>com.fasterxml.uuid</groupId>
-    <artifactId>java-uuid-generator</artifactId>
-    <version>3.1.0</version>
-</dependency>
+    	<groupId>com.fasterxml.uuid</groupId>
+    	<artifactId>java-uuid-generator</artifactId>
+    	<version>3.1.0</version>
+	</dependency>
+	<dependency>
+    	<groupId>org.apache.httpcomponents</groupId>
+    	<artifactId>httpclient</artifactId>
+    	<version>4.5.3</version>
+	</dependency>
+
 	
   </dependencies>
 </project>

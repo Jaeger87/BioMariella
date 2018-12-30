@@ -2,24 +2,12 @@ package bioproject.types;
 
 public class User implements Comparable{
 
-	private String ID;
 	private String username;
 	private int score;
-	
-	public void setID(String string) {
-		// TODO Auto-generated method stub
-		this.ID = string;
-		
-	}
 
 	public void setUsername(String username) {
 		// TODO Auto-generated method stub
 		this.username = username;
-	}
-
-	public String getId() {
-		// TODO Auto-generated method stub
-		return ID;
 	}
 
 	public String getUserName() {
