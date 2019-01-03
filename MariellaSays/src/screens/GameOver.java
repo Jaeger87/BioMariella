@@ -1,10 +1,18 @@
 package screens;
+import java.util.List;
+
+import apicalls.FakeHighScore;
+import apiengine.APIConsumer;
+import apiengine.Callback;
+import apimodel.HighScoreEntry;
 import processing.MariellaSaysMain;
 
-public class GameOver implements PScreen{
+public class GameOver implements PScreen, Callback{
 
 	private MariellaSaysMain parent;
 	
+	private List<HighScoreEntry> highScores;
+	private FakeHighScore fake; 
 	
 	public GameOver(MariellaSaysMain parent) {
 		super();
@@ -13,7 +21,9 @@ public class GameOver implements PScreen{
 	
 	@Override
 	public void setup() {
-
+		
+		fake = new FakeHighScore(this);
+		APIConsumer.getAPIConsumer().consumeAPI(fake);
 		parent.background(240);
 		parent.textSize(65);
         parent.fill(10);
@@ -39,6 +49,12 @@ public class GameOver implements PScreen{
 	public void keyReleased() {
 		if(parent.key == MariellaSaysMain.ENTER)
 			parent.logIn();
+		
+	}
+
+	@Override
+	public void callback() {
+		MariellaSaysMain.println(fake.getHighScores().toString());
 		
 	}
 

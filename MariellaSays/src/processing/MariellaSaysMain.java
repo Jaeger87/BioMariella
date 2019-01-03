@@ -30,10 +30,12 @@ public class MariellaSaysMain extends PApplet {
 	}
 
 	public void setup() {
+		//System.out.println(System.getProperty("sun.arch.data.model") );
+		
 		font = createFont("data/SNES_Italic.ttf", 10);
 		textFont(font);
 
-		
+
 		for (String port : Serial.list())
 			println(port);
 		
