@@ -25,6 +25,13 @@ public class HighScoreEntry {
 		return nickname;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return nickname + ":" + score;
+	}
+
 	
 	
 	

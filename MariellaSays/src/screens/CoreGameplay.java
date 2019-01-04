@@ -5,6 +5,7 @@ import java.util.List;
 import gameplay.CoreGameplaystatus;
 import gameplay.Mariella;
 import gameplay.SnesButton;
+import gameplay.SparaFlashManager;
 import processing.MariellaSaysMain;
 import processing.SerialContainer;
 import processing.core.PApplet;
@@ -20,6 +21,8 @@ public class CoreGameplay implements PScreen{
 	private final static int TIMETOSAYS = 1000;//millis
 	private final static int TIMETOPAUSE = 100;
 	
+	private SparaFlashManager sparaFlashManager;
+	
     private int saysIndex;
     private long nextStopSays;
     private long nextStopPause;
@@ -28,6 +31,9 @@ public class CoreGameplay implements PScreen{
     int listenIndex;
     
     private SerialContainer arduino;
+    private static final int defaultBackground = 240;
+    private static final int darkBackground = 110;
+    private int currentBackground = defaultBackground;
     
 	public CoreGameplay(MariellaSaysMain parent, SerialContainer arduino) {
 		super();
@@ -80,7 +86,14 @@ public class CoreGameplay implements PScreen{
         {
 		case LISTEN:
 			if(listenIndex == currentSequence.size())
-				coreStatus = CoreGameplaystatus.THINK;
+				if((mariella.getScore() + 1) % 3 == 0)
+				{
+					coreStatus = CoreGameplaystatus.SPARAFLASH;
+					sparaFlashManager = new SparaFlashManager(parent, arduino);
+				}
+				else
+					coreStatus = CoreGameplaystatus.THINK;
+				
 			break;
 		case SAYS:
 		
@@ -127,8 +140,21 @@ public class CoreGameplay implements PScreen{
 			
 			coreStatus = CoreGameplaystatus.SAYS;
 			break;
+			
 		case GAMEOVER:
 			parent.gameOver();
+			break;
+			
+		case SPARAFLASH:
+			if(sparaFlashManager.isDark())
+				currentBackground = darkBackground;
+			else
+				currentBackground = defaultBackground;
+			
+			if (sparaFlashManager.isEnd())
+				coreStatus = CoreGameplaystatus.THINK;
+			
+			
 			break;
 		default:
 			break;
@@ -142,7 +168,7 @@ public class CoreGameplay implements PScreen{
 	
     private void drawCoreBackground()
     {
-    	parent.background(240);
+    	parent.background(currentBackground);
     	parent.fill(85,94,109);
     	parent.ellipse(500,350,490,490);
         

@@ -19,7 +19,7 @@ public class LogInScreen implements PScreen{
 		
 		parent.textSize(65);
         parent.fill(10);
-        parent.text("Press start to log-in", parent.width/2 - 95, parent.height / 2 - 20);
+        parent.text("Press start to log-in", parent.width/2 - 195, parent.height / 2 - 20);
 		
 	}
 
