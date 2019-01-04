@@ -6,7 +6,6 @@ import processing.SerialContainer;
 import processing.core.PApplet;
 import processing.serial.Serial;
 import processing.video.Capture;
-import processing.serial.*;
 
 
 public class LoadingStuff extends AbstractRunAndCall{
@@ -38,15 +37,27 @@ public class LoadingStuff extends AbstractRunAndCall{
 		  } 
 		else {
 			MariellaSaysMain.println("Available cameras:");
-		    
+		    CameraSpecs best = null;
 			for (int i = 0; i < cameras.length; i++) 
 			{
 		    	MariellaSaysMain.println(cameras[i]);
+		    	
+		    	CameraSpecs currentCam = new CameraSpecs(cameras[i]);
+		    	
+		    	if(best == null || 
+		    			currentCam.getWidth() > best.getWidth())
+		    		best = currentCam;
+		    	
 		    }
 		    
-		    cam = new Capture(parent, cameras[0]);
+			if(best != null)
+			{
+				cam = new Capture(parent, best.getSpecs());
 		    
-		    cam.start(); 
+				MariellaSaysMain.println(best.getSpecs());
+		    
+				cam.start(); 
+			}
 		    
 		  }
 		  

@@ -5,6 +5,7 @@ import apiengine.RunnerConsumer;
 import backgroundstuff.LoadingStuff;
 import processing.core.PApplet;
 import processing.core.PFont;
+import screens.CamLogInScreen;
 import screens.CoreGameplay;
 import screens.GameOver;
 import screens.LogInScreen;
@@ -20,6 +21,7 @@ public class MariellaSaysMain extends PApplet implements Callback{
 	private PScreen registrationScreen;
 	private PScreen coreScreen;
 	private PScreen gameOverScreen;
+	private PScreen camLoginScreen;
 	private Capture cam;
 	
 
@@ -95,12 +97,23 @@ public class MariellaSaysMain extends PApplet implements Callback{
 	public void registration() {
 		changeScreen(registrationScreen);
 	}
+	
+	public void camLogIn() {
+		if(cam != null)
+			changeScreen(camLoginScreen);
+		else
+			startMariella();
+	}
 
 	@Override
 	public void callback() {
 		arduino = loadingStuffThread.getArduino();
 		cam = loadingStuffThread.getCam();
 		coreScreen = new CoreGameplay(this, arduino);
+		
+		if(cam != null)
+			camLoginScreen = new CamLogInScreen(this, cam, arduino);
+		
 		changeScreen(logInScreen);
 		
 	}

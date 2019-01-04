@@ -38,10 +38,9 @@ public class LogInScreen implements PScreen{
 	public void keyReleased() {
 		if(startPressed)
 			if(parent.key == MariellaSaysMain.ENTER)
-				parent.startMariella();
+				parent.camLogIn();
 			else if(parent.key == MariellaSaysMain.BACKSPACE)
 				parent.registration();
-		
 	}
 
 }

@@ -42,8 +42,6 @@ void loop() {
     char message = Serial.read();
     if (message != 0)
     {
-
-      Serial.println(message);
       switch (message)
       {
         case 'R':
@@ -68,6 +66,11 @@ void loop() {
         case 'D':
           setColorStrip(DARK);
           break;
+
+        case 'x':
+          Serial.println("LED");
+          break;
+          
         default:
           break;
       }
