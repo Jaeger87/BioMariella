@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import apicalls.FakeHighScore;
-import apiengine.APIConsumer;
+import apiengine.RunnerConsumer;
 import apiengine.Callback;
 import apimodel.HighScoreEntry;
 import processing.MariellaSaysMain;
@@ -25,7 +25,7 @@ public class GameOver implements PScreen, Callback{
 		
 		fake = new FakeHighScore(this);
 		highScores = new ArrayList<>();
-		APIConsumer.getAPIConsumer().consumeAPI(fake);
+		RunnerConsumer.getRunnerConsumer().consumeRunner(fake);
 		parent.background(240);
 		parent.textSize(65);
         parent.fill(10);

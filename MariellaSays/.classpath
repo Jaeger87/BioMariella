@@ -6,5 +6,8 @@
 	<classpathentry kind="lib" path="libs/interfascia.jar"/>
 	<classpathentry kind="lib" path="libs/jssc.jar"/>
 	<classpathentry kind="lib" path="libs/serial.jar"/>
+	<classpathentry kind="lib" path="libs/video.jar"/>
+	<classpathentry kind="lib" path="libs/gstreamer-java.jar"/>
+	<classpathentry kind="lib" path="libs/jna.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -3,27 +3,27 @@ package apiengine;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class APIConsumer {
+public class RunnerConsumer {
 
 	private ExecutorService pool;
 	private int threads = 2;
-	private static APIConsumer me; 
+	private static RunnerConsumer me; 
 	
-	private APIConsumer()
+	private RunnerConsumer()
 	{
 		pool = Executors.newFixedThreadPool(threads);
 	}
 	
-	public static APIConsumer getAPIConsumer()
+	public static RunnerConsumer getRunnerConsumer()
 	{
 		if (me == null)
-			me = new APIConsumer();
+			me = new RunnerConsumer();
 		return me;
 	}
 	
-	public void consumeAPI(AbstractCallToServer acs)
+	public void consumeRunner(AbstractRunAndCall arc)
 	{
-		pool.execute(acs);
+		pool.execute(arc);
 	}
 	
 }

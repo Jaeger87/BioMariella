@@ -14,18 +14,16 @@ public class LogInScreen implements PScreen{
 	
 	@Override
 	public void setup() {
-		startPressed = true;
-		parent.background(240);
-		
-		parent.textSize(65);
-        parent.fill(10);
-        parent.text("Press start to log-in", parent.width/2 - 195, parent.height / 2 - 20);
+
 		
 	}
 
 	@Override
 	public void draw() {
-
+		parent.background(240);
+		parent.textSize(65);
+        parent.fill(10);
+        parent.text("Press start to log-in", parent.width/2 - 195, parent.height / 2 - 20);
 		
 	}
 

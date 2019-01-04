@@ -1,10 +1,10 @@
 package apiengine;
 
-public abstract class AbstractCall implements Runnable{
+public abstract class AbstractRunAndCall implements Runnable{
 
 	private Callback callback;
 	
-	public AbstractCall(Callback callback) {
+	public AbstractRunAndCall(Callback callback) {
 		this.callback = callback;
 	}
 

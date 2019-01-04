@@ -2,7 +2,7 @@ package apiengine;
 
 import java.util.concurrent.TimeUnit;
 
-public abstract class AbstractCallToServer extends AbstractCall{
+public abstract class AbstractCallToServer extends AbstractRunAndCall{
 
 	public AbstractCallToServer(Callback callback) {
 		super(callback);

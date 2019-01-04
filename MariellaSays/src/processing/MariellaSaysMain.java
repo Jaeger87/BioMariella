@@ -1,15 +1,18 @@
 package processing;
 
+import apiengine.Callback;
+import apiengine.RunnerConsumer;
+import backgroundstuff.LoadingStuff;
 import processing.core.PApplet;
 import processing.core.PFont;
-import processing.serial.*;
 import screens.CoreGameplay;
 import screens.GameOver;
 import screens.LogInScreen;
 import screens.PScreen;
 import screens.RegistrationScreen;
+import processing.video.*;
 
-public class MariellaSaysMain extends PApplet {
+public class MariellaSaysMain extends PApplet implements Callback{
 
 	private PFont font;
 	private PScreen currentScreen;
@@ -17,8 +20,10 @@ public class MariellaSaysMain extends PApplet {
 	private PScreen registrationScreen;
 	private PScreen coreScreen;
 	private PScreen gameOverScreen;
+	private Capture cam;
 	
 
+	private LoadingStuff loadingStuffThread;
 	private SerialContainer arduino;
 
 	public static void main(String[] args) {
@@ -31,39 +36,35 @@ public class MariellaSaysMain extends PApplet {
 
 	public void setup() {
 		//System.out.println(System.getProperty("sun.arch.data.model") );
-		
+		surface.setTitle("Mariella says");
 		font = createFont("data/SNES_Italic.ttf", 10);
 		textFont(font);
+		
+		
+		background(240);
+		textSize(65);
+        fill(10);
+        text("Loading stuff... please wait", width/2 - 212, height / 2 - 20);
+		
+		
+	
 
-
-		for (String port : Serial.list())
-			println(port);
-		
-		if(Serial.list().length > 0)
-			arduino = new SerialContainer(new Serial(this, Serial.list()[0], 115200));
-		else
-			arduino = new SerialContainer();
-		
-
-		
-		coreScreen = new CoreGameplay(this, arduino);
-		
-		
 		
 		logInScreen = new LogInScreen(this);
 		gameOverScreen = new GameOver(this);
 		registrationScreen = new RegistrationScreen(this);
-		changeScreen(logInScreen);
-
-		// arduino.write("G\n");
+		
+		
+		loadingStuffThread = new LoadingStuff(this);
+		RunnerConsumer.getRunnerConsumer().consumeRunner(loadingStuffThread);
+		
 		// println(arduino.readStringUntil('\n'));
 	}
 
 	public void draw() {
-		currentScreen.draw();
-		//arduino.clear();
+		if(currentScreen != null)
+			currentScreen.draw();	
 		
-		surface.setTitle("Mariella says");
 	}
 
 	private void changeScreen(PScreen screen) {
@@ -93,6 +94,15 @@ public class MariellaSaysMain extends PApplet {
 
 	public void registration() {
 		changeScreen(registrationScreen);
+	}
+
+	@Override
+	public void callback() {
+		arduino = loadingStuffThread.getArduino();
+		cam = loadingStuffThread.getCam();
+		coreScreen = new CoreGameplay(this, arduino);
+		changeScreen(logInScreen);
+		
 	}
 
 }
