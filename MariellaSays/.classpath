@@ -9,5 +9,7 @@
 	<classpathentry kind="lib" path="libs/video.jar"/>
 	<classpathentry kind="lib" path="libs/gstreamer-java.jar"/>
 	<classpathentry kind="lib" path="libs/jna.jar"/>
+	<classpathentry kind="lib" path="libs/okhttp-3.12.1.jar"/>
+	<classpathentry kind="lib" path="libs/gson-2.8.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

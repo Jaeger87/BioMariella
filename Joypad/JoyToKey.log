@@ -21,3 +21,4 @@
 2019/01/04 23:03:39.520 Info   ConfigDir=C:\Users\andre\OneDrive\Documenti\GitHub\BioMariella\Joypad\*.cfg (ConfigFileManager.cpp#43)
 2019/01/04 23:03:39.530 Info   Failed to find AppLink.dat (AppLink\AppLinkManager.cpp#32)
 2019/01/04 23:03:39.548 Info   TimerInit: Initializing timer with x1 speed mode (interval = 16 msec)
+2019/01/05 00:08:02.473 Info   Application terminated (Utils\LogFile.cpp#20)

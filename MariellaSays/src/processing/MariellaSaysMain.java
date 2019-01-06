@@ -60,7 +60,6 @@ public class MariellaSaysMain extends PApplet implements Callback{
 		loadingStuffThread = new LoadingStuff(this);
 		RunnerConsumer.getRunnerConsumer().consumeRunner(loadingStuffThread);
 		
-		// println(arduino.readStringUntil('\n'));
 	}
 
 	public void draw() {
