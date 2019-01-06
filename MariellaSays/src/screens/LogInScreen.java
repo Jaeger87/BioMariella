@@ -4,7 +4,6 @@ import processing.MariellaSaysMain;
 public class LogInScreen implements PScreen{
 
 	private MariellaSaysMain parent;
-	private boolean startPressed = false;
 	
 	public LogInScreen(MariellaSaysMain parent) {
 		super();
@@ -28,18 +27,15 @@ public class LogInScreen implements PScreen{
 
 	@Override
 	public void keyPressed() {
-		if(parent.key == MariellaSaysMain.ENTER)
-			startPressed = true;
-		
+
 	}
 
 	@Override
 	public void keyReleased() {
-		if(startPressed)
-			if(parent.key == MariellaSaysMain.ENTER)
-				parent.camLogIn();
-			else if(parent.key == MariellaSaysMain.BACKSPACE)
-				parent.registration();
+		if(parent.key == MariellaSaysMain.ENTER)
+			parent.camLogIn();
+		else if(parent.key == MariellaSaysMain.BACKSPACE)
+			parent.registration();
 	}
 
 }

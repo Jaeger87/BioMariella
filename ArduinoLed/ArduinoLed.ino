@@ -19,20 +19,24 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(60, PIN, NEO_GRB + NEO_KHZ800);
 // pixel power leads, add 300 - 500 Ohm resistor on first pixel's data input
 // and minimize distance between Arduino and first pixel.  Avoid connecting
 // on a live circuit...if you must, connect GND first.
+const byte colorsIntensity = 90;
+const byte whiteIntensity = 170;
 
 
-const uint32_t RED = strip.Color(60, 0, 0);
-const uint32_t GREEN = strip.Color(0, 60, 0);
-const uint32_t BLU = strip.Color(0, 0, 60);
-const uint32_t YELLOW = strip.Color(60, 60, 0);
-const uint32_t WHITE = strip.Color(100, 100, 100);
+const uint32_t RED = strip.Color(colorsIntensity, 0, 0);
+const uint32_t GREEN = strip.Color(0, colorsIntensity, 0);
+const uint32_t BLU = strip.Color(0, 0, colorsIntensity);
+const uint32_t YELLOW = strip.Color(colorsIntensity, colorsIntensity, 0);
+const uint32_t WHITE = strip.Color(170, 170, 170);
 const uint32_t DARK = strip.Color(0, 0, 0);
+
+uint32_t current_color = DARK;
 
 
 void setup() {
 
   Serial.begin(115200);
- // Serial.setTimeout(20);
+  // Serial.setTimeout(20);
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
 }
@@ -45,37 +49,40 @@ void loop() {
       switch (message)
       {
         case 'R':
-          setColorStrip(RED);
+          current_color = RED;
           break;
         case 'G':
-          setColorStrip(GREEN);
+          current_color = GREEN;
 
           break;
 
         case 'B':
-          setColorStrip(BLU);
+          current_color = BLU;
           break;
 
         case 'Y':
-          setColorStrip(YELLOW);
+          current_color = YELLOW;
           break;
         case 'W':
-          setColorStrip(WHITE);
+          current_color = WHITE;
           break;
 
         case 'D':
-          setColorStrip(DARK);
+          current_color = DARK;
           break;
 
         case 'x':
           Serial.println("LED");
           break;
-          
+
         default:
           break;
       }
 
     }
+
+    setColorStrip(current_color);
+
   }
   //setColorStrip(WHITE);
   delay(10);
@@ -83,7 +90,7 @@ void loop() {
 
 void setColorStrip(uint32_t color)
 {
-  for (int i = 0; i < strip.numPixels(); i++)
+  for (int i = 38; i < strip.numPixels(); i++)
     strip.setPixelColor(i, color);
   strip.show();
 }

@@ -48,10 +48,16 @@ private IFTextField inputText;
 	@Override
 	public void keyReleased() 
 	{
-		if(parent.key == MariellaSaysMain.ENTER)
+		if(parent.key == MariellaSaysMain.BACKSPACE)
 		{
 			guiController.setVisible(false);
 			parent.logIn();
+		}
+		
+		if(parent.key == MariellaSaysMain.ENTER)
+		{
+			guiController.setVisible(false);
+			parent.camRegistration();
 		}
 	}
 	

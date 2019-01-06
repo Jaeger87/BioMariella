@@ -1,24 +1,25 @@
-2019/01/04 23:03:39.181 Info   C:\Users\andre\OneDrive\Documenti\GitHub\BioMariella\Joypad\JoyToKey.exe
-2019/01/04 23:03:39.181 Info   Starting JoyToKey Ver6.1.1
-2019/01/04 23:03:39.181 Info   ExeFile=C:\Users\andre\OneDrive\Documenti\GitHub\BioMariella\Joypad\JoyToKey.exe
-2019/01/04 23:03:39.181 Info   ConfigDir=C:\Users\andre\OneDrive\Documenti\GitHub\BioMariella\Joypad\
-2019/01/04 23:03:39.181 Info   IniFile=C:\Users\andre\OneDrive\Documenti\GitHub\BioMariella\Joypad\JoyToKey.ini
-2019/01/04 23:03:39.181 Info   Windows Version = 6.2
-2019/01/04 23:03:39.213 Info   Loaded VistaAPI.dll (Utils\Utils.cpp#232)
-2019/01/04 23:03:39.214 Info   LicenseKey "" is not valid
-2019/01/04 23:03:39.393 Info   Loading XInput1_3.dll (Joystick.cpp#128)
-2019/01/04 23:03:39.397 Info   Initialized XInput (Joystick.cpp#146)
-2019/01/04 23:03:39.512 Info   Detected a DI joystick: {C2186E90-4E9A-11E6-8001-444553540000}, usb gamepad           , usb gamepad           
-2019/01/04 23:03:39.513 Info   Preferred index = -1
-2019/01/04 23:03:39.514 Info   numAxis = 2
-2019/01/04 23:03:39.514 Info   numPOVs = 0
-2019/01/04 23:03:39.514 Info   numButtons = 10
-2019/01/04 23:03:39.514 Info   EnumDeviceObject: Axis offset=0 type=102 name=Asse Y
-2019/01/04 23:03:39.514 Info   EnumDeviceObject: Axis offset=4 type=2 name=Asse X
-2019/01/04 23:03:39.517 Info   DetectJoysticks: Detected 1 DI joystick(s)
-2019/01/04 23:03:39.520 Info   Joystick #1: usb gamepad
-2019/01/04 23:03:39.520 Info   1 joysticks are detected (Joystick.cpp#168)
-2019/01/04 23:03:39.520 Info   ConfigDir=C:\Users\andre\OneDrive\Documenti\GitHub\BioMariella\Joypad\*.cfg (ConfigFileManager.cpp#43)
-2019/01/04 23:03:39.530 Info   Failed to find AppLink.dat (AppLink\AppLinkManager.cpp#32)
-2019/01/04 23:03:39.548 Info   TimerInit: Initializing timer with x1 speed mode (interval = 16 msec)
-2019/01/05 00:08:02.473 Info   Application terminated (Utils\LogFile.cpp#20)
+2019/01/06 18:44:20.313 Info   C:\Users\andre\OneDrive\Documenti\GitHub\BioMariella\Joypad\JoyToKey.exe
+2019/01/06 18:44:20.313 Info   Starting JoyToKey Ver6.1.1
+2019/01/06 18:44:20.313 Info   ExeFile=C:\Users\andre\OneDrive\Documenti\GitHub\BioMariella\Joypad\JoyToKey.exe
+2019/01/06 18:44:20.313 Info   ConfigDir=C:\Users\andre\OneDrive\Documenti\GitHub\BioMariella\Joypad\
+2019/01/06 18:44:20.313 Info   IniFile=C:\Users\andre\OneDrive\Documenti\GitHub\BioMariella\Joypad\JoyToKey.ini
+2019/01/06 18:44:20.313 Info   Windows Version = 6.2
+2019/01/06 18:44:20.321 Info   Loaded VistaAPI.dll (Utils\Utils.cpp#232)
+2019/01/06 18:44:20.345 Info   LicenseKey "" is not valid
+2019/01/06 18:44:20.554 Info   Loading XInput1_3.dll (Joystick.cpp#128)
+2019/01/06 18:44:20.557 Info   Initialized XInput (Joystick.cpp#146)
+2019/01/06 18:44:20.668 Info   Detected a DI joystick: {C2186E90-4E9A-11E6-8001-444553540000}, usb gamepad           , usb gamepad           
+2019/01/06 18:44:20.668 Info   Preferred index = -1
+2019/01/06 18:44:20.669 Info   numAxis = 2
+2019/01/06 18:44:20.669 Info   numPOVs = 0
+2019/01/06 18:44:20.669 Info   numButtons = 10
+2019/01/06 18:44:20.669 Info   EnumDeviceObject: Axis offset=0 type=102 name=Asse Y
+2019/01/06 18:44:20.669 Info   EnumDeviceObject: Axis offset=4 type=2 name=Asse X
+2019/01/06 18:44:20.672 Info   DetectJoysticks: Detected 1 DI joystick(s)
+2019/01/06 18:44:20.676 Info   Joystick #1: usb gamepad
+2019/01/06 18:44:20.676 Info   1 joysticks are detected (Joystick.cpp#168)
+2019/01/06 18:44:20.676 Info   ConfigDir=C:\Users\andre\OneDrive\Documenti\GitHub\BioMariella\Joypad\*.cfg (ConfigFileManager.cpp#43)
+2019/01/06 18:44:20.700 Info   Failed to find AppLink.dat (AppLink\AppLinkManager.cpp#32)
+2019/01/06 18:44:20.727 Info   TimerInit: Initializing timer with x1 speed mode (interval = 16 msec)
+2019/01/06 19:24:22.222 Info   Received WM_QUERYENDSESSION.  Exiting... (Main.cpp#215)
+2019/01/06 19:24:22.222 Info   Application terminated (Utils\LogFile.cpp#20)

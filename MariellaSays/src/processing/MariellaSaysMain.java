@@ -6,6 +6,7 @@ import backgroundstuff.LoadingStuff;
 import processing.core.PApplet;
 import processing.core.PFont;
 import screens.CamLogInScreen;
+import screens.CamRegistrationScreen;
 import screens.CoreGameplay;
 import screens.GameOver;
 import screens.LogInScreen;
@@ -22,6 +23,7 @@ public class MariellaSaysMain extends PApplet implements Callback{
 	private PScreen coreScreen;
 	private PScreen gameOverScreen;
 	private PScreen camLoginScreen;
+	private PScreen camRegistrationScreen;
 	private Capture cam;
 	
 
@@ -49,8 +51,6 @@ public class MariellaSaysMain extends PApplet implements Callback{
         text("Loading stuff... please wait", width/2 - 212, height / 2 - 20);
 		
 		
-	
-
 		
 		logInScreen = new LogInScreen(this);
 		gameOverScreen = new GameOver(this);
@@ -103,6 +103,14 @@ public class MariellaSaysMain extends PApplet implements Callback{
 		else
 			startMariella();
 	}
+	
+	public void camRegistration()
+	{
+		if(cam != null)
+			changeScreen(camRegistrationScreen);
+		else
+			logIn();
+	}
 
 	@Override
 	public void callback() {
@@ -111,7 +119,10 @@ public class MariellaSaysMain extends PApplet implements Callback{
 		coreScreen = new CoreGameplay(this, arduino);
 		
 		if(cam != null)
+		{
 			camLoginScreen = new CamLogInScreen(this, cam, arduino);
+			camRegistrationScreen = new CamRegistrationScreen(this, cam, arduino);
+		}
 		
 		changeScreen(logInScreen);
 		
