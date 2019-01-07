@@ -23,7 +23,7 @@ public class MariellaSaysMain extends PApplet implements Callback{
 	private PScreen coreScreen;
 	private PScreen gameOverScreen;
 	private PScreen camLoginScreen;
-	private PScreen camRegistrationScreen;
+	private CamRegistrationScreen camRegistrationScreen;
 	private Capture cam;
 	
 
@@ -104,10 +104,14 @@ public class MariellaSaysMain extends PApplet implements Callback{
 			startMariella();
 	}
 	
-	public void camRegistration()
+	public void camRegistration(String nickname)
 	{
-		if(cam != null)
+		if(cam != null) 
+		{
 			changeScreen(camRegistrationScreen);
+			camRegistrationScreen.setNickname(nickname);
+		}
+			
 		else
 			logIn();
 	}

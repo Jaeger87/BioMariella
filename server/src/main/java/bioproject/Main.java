@@ -16,6 +16,7 @@ import org.postgresql.util.Base64;
 
 import com.google.gson.*;
 import bioproject.bll.UsersBLL;
+import bioproject.types.User;
 
 public class Main {
 	
@@ -86,7 +87,7 @@ public class Main {
         		return new Gson().toJson("Json file expected.");
         	}
         	JsonObject obj = json.getAsJsonObject();
-        	if(obj.has("username") || obj.has("newScore")) {
+        	if(obj.has("username") && obj.has("newScore")) {
         		String username = obj.get("username").getAsString();
         		int newScore = obj.get("newScore").getAsInt();
         		if(UsersBLL.updateScore(username, newScore)) 
@@ -144,6 +145,10 @@ public class Main {
         		
         		JSONObject outobj = new JSONObject();
         		outobj.put("username", output);
+        		User u = UsersBLL.getUser(output);
+        		int score = 0;
+        		if(u != null) score = u.getScore();
+        		outobj.put("score", score);
         		return new Gson().toJson(outobj.toString());
         	}
         	else {

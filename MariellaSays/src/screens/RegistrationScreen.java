@@ -57,7 +57,8 @@ private IFTextField inputText;
 		if(parent.key == MariellaSaysMain.ENTER)
 		{
 			guiController.setVisible(false);
-			parent.camRegistration();
+			parent.println(inputText.getValue());
+			parent.camRegistration(inputText.getValue());
 		}
 	}
 	

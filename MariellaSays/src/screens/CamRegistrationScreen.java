@@ -1,17 +1,44 @@
 package screens;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import apicalls.DetectionAndSendFace;
 import apiengine.Callback;
+import apiengine.RunnerConsumer;
 import processing.MariellaSaysMain;
 import processing.SerialContainer;
 import processing.video.Capture;
 
 public class CamRegistrationScreen implements PScreen, Callback{
 
-	
 	private Capture cam;
 	private MariellaSaysMain parent;
 	private SerialContainer arduino;
 	private String nickname;
+	private boolean flag= false;
+	private long nextphoto = 0;
+	int i = 0;
+	private DetectionAndSendFace det;
+	
+	
 	
 	public CamRegistrationScreen(MariellaSaysMain parent, Capture cam, SerialContainer arduino) {
 		this.cam = cam;
@@ -30,7 +57,28 @@ public class CamRegistrationScreen implements PScreen, Callback{
 		if (cam.available() == true) 
 		    cam.read();
 		
-		  parent.set(-140, 20, cam);
+		parent.set(-140, 20, cam);
+		
+		
+		
+		if(flag)
+		{
+			if(parent.millis()>nextphoto) {
+				nextphoto = parent.millis() + 1000;
+				parent.println(nextphoto);
+				cam.save("photos/"+nickname+"/"+i+".jpg");
+				i++;
+			}
+			if(i>=5) {
+				flag=false;
+				det = new DetectionAndSendFace(this, nickname);
+				RunnerConsumer.getRunnerConsumer().consumeRunner(det);
+				
+			}
+		}
+		  
+		  
+		  
 		
 	}
 
@@ -50,11 +98,32 @@ public class CamRegistrationScreen implements PScreen, Callback{
 	
 		if (parent.key == 'A' || parent.key == 'a')
 		{
-			cam.save("photos/streetfighter2turbo.jpeg");
-		}
-		
+			flag = true;
+			nextphoto = parent.millis()+1000; 
+			
+			String path = "photos/"+nickname;
+			createDir(path);
+		}	
+	
 	}
-
+	
+	
+	public void createDir(String path) {
+		try {
+	         // returns pathnames for files and directory
+	         File f = new File(path);
+	         
+	         // create
+	         boolean bool = f.mkdir();
+	         
+	         // print
+	         System.out.print("Directory created? "+bool);
+	         
+	      } catch(Exception e) {
+	         // if any error occurs
+	         e.printStackTrace();
+	      }
+	}
 	
 	public void setNickname(String nickname)
 	{
@@ -63,7 +132,8 @@ public class CamRegistrationScreen implements PScreen, Callback{
 	
 	@Override
 	public void callback() {
-		
+		parent.logIn();
 	}
 
+	
 }
