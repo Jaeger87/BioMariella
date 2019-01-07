@@ -2,6 +2,7 @@ package screens;
 import java.util.ArrayList;
 import java.util.List;
 
+import apimodel.UserProfile;
 import gameplay.CoreGameplaystatus;
 import gameplay.Mariella;
 import gameplay.SnesButton;
@@ -34,6 +35,8 @@ public class CoreGameplay implements PScreen{
     private static final int defaultBackground = 240;
     private static final int darkBackground = 110;
     private int currentBackground = defaultBackground;
+    
+    private UserProfile up;
     
 	public CoreGameplay(MariellaSaysMain parent, SerialContainer arduino) {
 		super();
@@ -142,7 +145,7 @@ public class CoreGameplay implements PScreen{
 			break;
 			
 		case GAMEOVER:
-			parent.gameOver();
+			parent.gameOver(up);
 			break;
 			
 		case SPARAFLASH:
@@ -223,6 +226,12 @@ public class CoreGameplay implements PScreen{
     	}
     	
     }
+
+
+
+	public void setUserprofile(UserProfile up) {
+		this.up = up;
+	}
 	
 	
 	

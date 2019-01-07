@@ -20,7 +20,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import apiengine.AbstractCallToServer;
 import apiengine.AbstractRunAndCall;
 import apiengine.Callback;
 
@@ -29,7 +28,7 @@ import apiengine.Callback;
 public class DetectionAndSendFace extends AbstractRunAndCall {
 
 	private static String SHELL_COMMAND = "python FaceDetection.py ";
-	private static String nickname;
+	private String nickname;
 	//API resource identifier
 	private static String LOCAL_URI = "http://localhost:4567/registration";
 	

@@ -1,16 +1,21 @@
 package screens;
 
+import apicalls.LogInCall;
+import apiengine.Callback;
+import apimodel.UserProfile;
 import processing.MariellaSaysMain;
 import processing.SerialContainer;
 import processing.video.Capture;
 
-public class CamLogInScreen implements PScreen{
+public class CamLogInScreen implements PScreen, Callback{
 
 	
 	private Capture cam;
 	private MariellaSaysMain parent;
 	private SerialContainer arduino;
 	private boolean startPressed = false;
+	private static final String loginPath = "photos/login.jpeg";
+	private LogInCall logincall;
 	
 	public CamLogInScreen(MariellaSaysMain parent, Capture cam, SerialContainer arduino) {
 		this.cam = cam;
@@ -55,10 +60,29 @@ public class CamLogInScreen implements PScreen{
 				arduino.write('D');
 				parent.startMariella();
 			}
+		
 		if (parent.key == 'A' || parent.key == 'a')
 		{
-			cam.save("photos/streetfighter2turbo.jpeg");
+			cam.save(loginPath);
+			logincall = new LogInCall(this, loginPath);
 		}
+		
+	}
+
+	@Override
+	public void callback() {
+		UserProfile up = logincall.getUserProfile();
+		
+		if(up == null)
+		{
+			if(parent.isInCamLogIn())
+			{
+				cam.save(loginPath);
+				logincall = new LogInCall(this, loginPath);
+			}
+		}
+		
+		
 		
 	}
 

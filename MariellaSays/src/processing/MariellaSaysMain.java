@@ -2,6 +2,7 @@ package processing;
 
 import apiengine.Callback;
 import apiengine.RunnerConsumer;
+import apimodel.UserProfile;
 import backgroundstuff.LoadingStuff;
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -20,8 +21,8 @@ public class MariellaSaysMain extends PApplet implements Callback{
 	private PScreen currentScreen;
 	private PScreen logInScreen;
 	private PScreen registrationScreen;
-	private PScreen coreScreen;
-	private PScreen gameOverScreen;
+	private CoreGameplay coreScreen;
+	private GameOver gameOverScreen;
 	private PScreen camLoginScreen;
 	private CamRegistrationScreen camRegistrationScreen;
 	private Capture cam;
@@ -84,11 +85,21 @@ public class MariellaSaysMain extends PApplet implements Callback{
 	public void gameOver() {
 		changeScreen(gameOverScreen);
 	}
+	
+	public void gameOver(UserProfile up) {
+		gameOverScreen.setUserprofile(up);
+		changeScreen(gameOverScreen);
+	}
 
 	public void startMariella() {
 		changeScreen(coreScreen);
 	}
 
+	public void startMariella(UserProfile up) {
+		coreScreen.setUserprofile(up);
+		changeScreen(coreScreen);
+	}
+	
 	public void logIn() {
 		changeScreen(logInScreen);
 	}
@@ -131,5 +142,13 @@ public class MariellaSaysMain extends PApplet implements Callback{
 		changeScreen(logInScreen);
 		
 	}
+	
+	
+	public boolean isInCamLogIn()
+	{
+		return currentScreen instanceof CamLogInScreen;
+	}
 
+	
+	
 }

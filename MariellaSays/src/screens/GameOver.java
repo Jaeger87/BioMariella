@@ -6,6 +6,7 @@ import apicalls.FakeHighScore;
 import apiengine.RunnerConsumer;
 import apiengine.Callback;
 import apimodel.HighScoreEntry;
+import apimodel.UserProfile;
 import processing.MariellaSaysMain;
 
 public class GameOver implements PScreen, Callback{
@@ -15,6 +16,8 @@ public class GameOver implements PScreen, Callback{
 	private List<HighScoreEntry> highScores;
 	private FakeHighScore fake; 
 	
+	private UserProfile up;
+	
 	public GameOver(MariellaSaysMain parent) {
 		super();
 		this.parent = parent;
@@ -22,6 +25,11 @@ public class GameOver implements PScreen, Callback{
 	
 	@Override
 	public void setup() {
+		
+		if(up != null)
+		{
+			//chiama api
+		}
 		
 		fake = new FakeHighScore(this);
 		highScores = new ArrayList<>();
@@ -64,5 +72,11 @@ public class GameOver implements PScreen, Callback{
 		MariellaSaysMain.println(fake.getHighScores().toString());
 		highScores = fake.getHighScores();
 	}
+	
+	
+	public void setUserprofile(UserProfile up) {
+		this.up = up;
+	}
+	
 
 }
