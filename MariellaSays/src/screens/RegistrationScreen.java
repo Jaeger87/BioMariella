@@ -27,8 +27,15 @@ private IFTextField inputText;
 		parent.background(240);
 		guiController = new GUIController(parent);
 		
-		inputText = new IFTextField("Text Field", parent.width /2 - 40, parent.height /2 -15, 150);
-		inputText.setHeight(30);
+		int widthInputText = 400;
+		
+		
+		
+		inputText = new IFTextField("Text Field", parent.width /2 - widthInputText/2, parent.height /2 -15, 150);
+		
+		inputText.setHeight(25);
+		inputText.setWidth(widthInputText);
+		
 		guiController.add(inputText);
 		
 	}
@@ -36,7 +43,7 @@ private IFTextField inputText;
 	@Override
 	public void draw() 
 	{
-		
+		parent.text("Insert username", parent.width /2 - 150, parent.height /2 -65);
 	}
 
 	@Override
@@ -48,7 +55,7 @@ private IFTextField inputText;
 	@Override
 	public void keyReleased() 
 	{
-		if(parent.key == MariellaSaysMain.BACKSPACE)
+		if(parent.key == MariellaSaysMain.DELETE)
 		{
 			guiController.setVisible(false);
 			parent.logIn();
@@ -57,7 +64,6 @@ private IFTextField inputText;
 		if(parent.key == MariellaSaysMain.ENTER)
 		{
 			guiController.setVisible(false);
-			parent.println(inputText.getValue());
 			parent.camRegistration(inputText.getValue());
 		}
 	}
