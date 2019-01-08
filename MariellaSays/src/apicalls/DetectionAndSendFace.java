@@ -55,7 +55,8 @@ public class DetectionAndSendFace extends AbstractRunAndCall {
 		
 	}
 	
-	public void APICall() {
+	private void APICall() 
+	{
 		//loading the ROI images
 		List<File> images = new ArrayList<>();
 		int i = 1;
@@ -95,25 +96,27 @@ public class DetectionAndSendFace extends AbstractRunAndCall {
 		obj.put("images", arr);
 		        
 		        try {
-					StringEntity entity = new StringEntity(obj.toString());
+		        	//HTTP request
+					StringEntity strEntity = new StringEntity(obj.toString());
 					request.setHeader("Content-type", "application/json");
-					request.setEntity(entity);
-				} catch (UnsupportedEncodingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-		        try {
+					request.setEntity(strEntity);
+					
+					//HTTP response
 					HttpResponse response = httpClient.execute(request);
 					HttpEntity entity = response.getEntity();
 					String responseString = EntityUtils.toString(entity, "UTF-8");
+					
+					//print the result of the response
 					System.out.println(responseString);
-				} catch (ClientProtocolException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
+					
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+		        
+		      //delete all the images
+				for(File f : images) f.delete();
+		        
 	}
 
 }

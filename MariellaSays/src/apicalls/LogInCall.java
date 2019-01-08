@@ -44,54 +44,50 @@ public class LogInCall extends AbstractRunAndCall{
 	@Override
 	public void callbackRun() {
 		APICall();
-		
-		
 	}
 
-	public void APICall() {
+	private void APICall() {
+		
+		//loading the sample image
 		File image = new File(imagePath);
 		String encodedfile = null;
+		
         try {
+        	//encoding the sample
             FileInputStream fileInputStreamReader = new FileInputStream(image);
            	byte[] bytes = new byte[(int)image.length()];
             fileInputStreamReader.read(bytes);
             encodedfile = new String(Base64.getEncoder().encodeToString(bytes));             
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        } 
+        
+        //HTTP request
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost(LOCAL_URI);
         JSONObject obj = new JSONObject();
         obj.put("image", encodedfile);
         try {
-			StringEntity entity = new StringEntity(obj.toString());
+        	//creating the json 
+			StringEntity strEntity = new StringEntity(obj.toString());
 			request.setHeader("Content-type", "application/json");
-			request.setEntity(entity);
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        try {
+			request.setEntity(strEntity);
+			
+			//HTTP response
 			HttpResponse response = httpClient.execute(request);
 			HttpEntity entity = response.getEntity();
 			String responseString = EntityUtils.toString(entity, "UTF-8");
-			System.out.println(responseString);
+			JSONObject jsonResponse = new JSONObject(responseString);
+			System.out.println("The user identified is " + jsonResponse.getString("username"));
 			
+			//creating the user istance
 			Gson gson = new Gson();
-			
 			loggedUser = gson.fromJson(responseString, UserProfile.class);
-			
-		} catch (ClientProtocolException e) {
-		
-			e.printStackTrace();
-		} catch (IOException e) {
-
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        image.delete();
 	}
 
 

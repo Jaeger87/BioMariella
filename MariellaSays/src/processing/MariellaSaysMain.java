@@ -49,7 +49,7 @@ public class MariellaSaysMain extends PApplet implements Callback{
 		background(240);
 		textSize(65);
         fill(10);
-        text("Loading stuff... please wait", width/2 - 212, height / 2 - 20);
+        text("Loading stuff... please wait", width/2 - 195, height / 2 - 20);
 		
 		
 		

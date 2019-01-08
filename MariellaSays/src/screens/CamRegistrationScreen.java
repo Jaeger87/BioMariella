@@ -99,7 +99,7 @@ public class CamRegistrationScreen implements PScreen, Callback{
 	         boolean bool = f.mkdir();
 	         
 	         // print
-	         System.out.print("Directory created? "+bool);
+	         System.out.println("Directory created? " + bool);
 	         
 	      } catch(Exception e) {
 	         // if any error occurs
