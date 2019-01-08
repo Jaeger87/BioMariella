@@ -83,9 +83,12 @@ public class CamLogInScreen implements PScreen, Callback{
 				logincall = new LogInCall(this, loginPath);
 				RunnerConsumer.getRunnerConsumer().consumeRunner(logincall);
 			}
+			
+			return;
 		}
 		
-		
+		parent.startMariella(up);
+
 		
 	}
 
