@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import apiengine.AbstractRunAndCall;
 import apiengine.Callback;
@@ -77,13 +79,18 @@ public class LogInCall extends AbstractRunAndCall{
 			//HTTP response
 			HttpResponse response = httpClient.execute(request);
 			HttpEntity entity = response.getEntity();
-			String responseString = EntityUtils.toString(entity, "UTF-8");
-			JSONObject jsonResponse = new JSONObject(responseString);
-			System.out.println("The user identified is " + jsonResponse.getString("username"));
+			String responseString = EntityUtils.toString(entity);
+
+			//print the username
+			JSONObject jobj = new JSONObject(responseString);
+			System.out.println("The identified user is " 
+			+ jobj.getString("username") + " and his score is " 
+			+ jobj.getInt("score"));
 			
 			//creating the user istance
 			Gson gson = new Gson();
-			loggedUser = gson.fromJson(responseString, UserProfile.class);
+			loggedUser = gson.fromJson(gson.toJson(jobj), UserProfile.class);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
