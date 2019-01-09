@@ -18,5 +18,8 @@ public abstract class AbstractRunAndCall implements Runnable{
 		callback.callback();	
 	}
 
-	
+	public void executeCallback()
+	{
+		callback.callback();
+	}
 }
