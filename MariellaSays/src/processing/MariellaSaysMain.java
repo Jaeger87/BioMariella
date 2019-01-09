@@ -76,8 +76,8 @@ public class MariellaSaysMain extends PApplet implements Callback{
 	}
 
 	private void changeScreen(PScreen screen) {
-		currentScreen = screen;
 		screen.setup();
+		currentScreen = screen;
 	}
 
 	public void keyPressed() {
