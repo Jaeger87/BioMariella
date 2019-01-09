@@ -103,7 +103,7 @@ public class MariellaSaysMain extends PApplet implements Callback{
 
 	public void startMariella(UserProfile up) {
 		coreScreen.setUserprofile(up);
-		changeScreen(coreScreen);
+		startMariella();
 	}
 	
 	public void logIn() {

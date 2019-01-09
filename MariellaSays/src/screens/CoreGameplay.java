@@ -63,6 +63,8 @@ public class CoreGameplay implements PScreen{
     			parent.color(160,160,0), 402, 457, 'B', 'Y'));//giallo
     	
     	mariella = new Mariella();
+    	parent.println("ok setup");
+    	
     	coreStatus = CoreGameplaystatus.THINK;
     	
     	saysIndex = 0;
