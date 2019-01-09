@@ -1,5 +1,8 @@
 package processing;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import apiengine.Callback;
 import apiengine.RunnerConsumer;
 import apimodel.UserProfile;
@@ -13,6 +16,7 @@ import screens.GameOver;
 import screens.LogInScreen;
 import screens.PScreen;
 import screens.RegistrationScreen;
+import screens.SelectPlayerScreen;
 import processing.video.*;
 
 public class MariellaSaysMain extends PApplet implements Callback{
@@ -25,6 +29,7 @@ public class MariellaSaysMain extends PApplet implements Callback{
 	private GameOver gameOverScreen;
 	private PScreen camLoginScreen;
 	private CamRegistrationScreen camRegistrationScreen;
+	private SelectPlayerScreen selectPlayerScreen;
 	private Capture cam;
 	
 
@@ -56,6 +61,7 @@ public class MariellaSaysMain extends PApplet implements Callback{
 		logInScreen = new LogInScreen(this);
 		gameOverScreen = new GameOver(this);
 		registrationScreen = new RegistrationScreen(this);
+		selectPlayerScreen = new SelectPlayerScreen(this);
 		
 		
 		loadingStuffThread = new LoadingStuff(this);
@@ -114,6 +120,29 @@ public class MariellaSaysMain extends PApplet implements Callback{
 		else
 			startMariella();
 	}
+	
+	public void selectPlayer(List<UserProfile> userProfiles) {
+		selectPlayerScreen.setUserProfiles(userProfiles);
+		changeScreen(selectPlayerScreen);
+	}
+	
+	public void fakeSelectPlayer() {
+		List<UserProfile> userProfiles = new ArrayList<UserProfile>();
+		
+		userProfiles.add(new UserProfile("Jaeger", 200));
+		userProfiles.add(new UserProfile("Jaeger", 200));
+		userProfiles.add(new UserProfile("Jaeger", 200));
+		userProfiles.add(new UserProfile("Jaeger", 200));
+		userProfiles.add(new UserProfile("Jaeger", 200));
+		userProfiles.add(new UserProfile("Jaeger", 200));
+		userProfiles.add(new UserProfile("gfffhggkgjgkggkgkgkggkgkggyyy", 200));
+		userProfiles.add(new UserProfile("Jaeger", 200));
+		userProfiles.add(new UserProfile("Jaeger", 200));
+		
+		selectPlayerScreen.setUserProfiles(userProfiles);
+		changeScreen(selectPlayerScreen);
+	}
+	
 	
 	public void camRegistration(String nickname)
 	{

@@ -37,6 +37,9 @@ public class LogInScreen implements PScreen{
 			parent.camLogIn();
 		else if(parent.key == MariellaSaysMain.BACKSPACE)
 			parent.registration();
+		
+		else if(parent.key == ' ')
+			parent.fakeSelectPlayer();
 	}
 
 }
