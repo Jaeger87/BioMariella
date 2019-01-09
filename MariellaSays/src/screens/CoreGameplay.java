@@ -2,6 +2,9 @@ package screens;
 import java.util.ArrayList;
 import java.util.List;
 
+import apicalls.UpdateScoreAPI;
+import apiengine.Callback;
+import apiengine.RunnerConsumer;
 import apimodel.UserProfile;
 import gameplay.CoreGameplaystatus;
 import gameplay.Mariella;
@@ -11,7 +14,7 @@ import processing.MariellaSaysMain;
 import processing.SerialContainer;
 import processing.core.PApplet;
 
-public class CoreGameplay implements PScreen{
+public class CoreGameplay implements PScreen, Callback{
 
 	
 	private MariellaSaysMain parent;
@@ -37,6 +40,8 @@ public class CoreGameplay implements PScreen{
     private int currentBackground = defaultBackground;
     
     private UserProfile up;
+    
+    private UpdateScoreAPI updateScoreAPI;
     
 	public CoreGameplay(MariellaSaysMain parent, SerialContainer arduino) {
 		super();
@@ -147,6 +152,12 @@ public class CoreGameplay implements PScreen{
 			break;
 			
 		case GAMEOVER:
+			if(up != null)
+			{
+				updateScoreAPI = new UpdateScoreAPI(this, mariella.getScore(), up.getUsername());
+				RunnerConsumer.getRunnerConsumer().consumeRunner(updateScoreAPI);
+			}
+			
 			parent.gameOver(up);
 			up = null;
 			break;
@@ -234,6 +245,14 @@ public class CoreGameplay implements PScreen{
 
 	public void setUserprofile(UserProfile up) {
 		this.up = up;
+	}
+
+
+
+	@Override
+	public void callback() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

@@ -11,7 +11,6 @@ public class HighScoreEntry {
 	}
 
 	
-	
 	public HighScoreEntry(int score, String nickname) {
 		this.score = score;
 		this.nickname = nickname;
