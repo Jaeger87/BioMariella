@@ -146,6 +146,7 @@ public class CoreGameplay implements PScreen{
 			
 		case GAMEOVER:
 			parent.gameOver(up);
+			up = null;
 			break;
 			
 		case SPARAFLASH:

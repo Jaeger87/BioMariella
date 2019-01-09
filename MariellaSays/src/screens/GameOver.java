@@ -63,7 +63,10 @@ public class GameOver implements PScreen, Callback{
 	@Override
 	public void keyReleased() {
 		if(parent.key == MariellaSaysMain.ENTER)
+		{
+			up = null;
 			parent.logIn();	
+		}
 		
 	}
 
