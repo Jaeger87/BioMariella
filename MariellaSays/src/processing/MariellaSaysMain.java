@@ -91,7 +91,7 @@ public class MariellaSaysMain extends PApplet implements Callback{
 	}
 
 	public void gameOver() {
-		changeScreen(gameOverScreen);
+		changeScreen(gameOverScreen);//
 	}
 	
 	public void gameOver(UserProfile up) {

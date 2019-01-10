@@ -18,9 +18,9 @@ public class CamRegistrationScreen implements PScreen, Callback{
 	private String nickname;
 	private boolean flag= false;
 	private long nextphoto = 0;
-	int i = 0;
+	private int i = 0;
 	private DetectionAndSendFace det;
-	int intReg = 0;
+	private int intReg = 0;
 	
 	
 	
@@ -83,9 +83,9 @@ public class CamRegistrationScreen implements PScreen, Callback{
 	
 		if (parent.key == 'A' || parent.key == 'a')
 		{
+			i = 0;
+			nextphoto = parent.millis()+1000;
 			flag = true;
-			nextphoto = parent.millis()+1000; 
-			
 			String path = "photos/"+nickname;
 			createDir(path);
 		}	
