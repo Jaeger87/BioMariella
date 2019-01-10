@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jetty.http.HttpStatus;
 import org.json.JSONArray;
@@ -21,7 +23,7 @@ import bioproject.types.User;
 public class Main {
 	
 	private static String SHELL_COMMAND = 
-			"python FaceRecognizer.py probes/probe.jpg";
+			"python FaceRecMul.py";
 	
     public static void main(String[] args) 
     {
@@ -102,7 +104,7 @@ public class Main {
         	}
         	else {
         		res.status(HttpStatus.BAD_REQUEST_400);
-        		return new Gson().toJson("Missing fields. Requred: username, images");
+        		return new Gson().toJson("Missing fields. Required: username, newScore");
         	}
         	
         });
@@ -111,11 +113,13 @@ public class Main {
         //get global scores
         get("/ranking", (req, res)->{
         	res.type("/application/json");
-        	return new Gson().toJson(UsersBLL.getRanking());
+        	JSONObject outobj = new JSONObject();
+        	JSONArray jsonArr = new JSONArray(UsersBLL.getRanking());
+        	outobj.put("ranking", jsonArr);
+        	return outobj;
         });
         
-        
-        //login and recognition of the user
+      //login and recognition of the user with single image
         post("/authentication", (req, res)->{
         	res.type("/application/json");
         	JsonParser parser = new JsonParser();
@@ -150,6 +154,69 @@ public class Main {
         		if(u != null) score = u.getScore();
         		outobj.put("score", score);
         		return new Gson().toJson(outobj.toString());
+        	}
+        	else {
+        		res.status(HttpStatus.BAD_REQUEST_400);
+    		    return new Gson().toJson("Missing fields. Required: image");
+    	    }
+        });
+        
+        //login and recognition of the user with multiple images
+        post("/multiauth", (req, res)->{
+        	res.type("/application/json");
+        	JsonParser parser = new JsonParser();
+        	JsonElement json = parser.parse(req.body());
+        	if(!json.isJsonObject()) 
+        	{
+        		res.status(HttpStatus.BAD_REQUEST_400);
+        		return new Gson().toJson("Json file expected");
+        	}
+        	JsonObject obj = json.getAsJsonObject();
+        	if(obj.has("images")) {
+        		
+        		List<File> toDelete = new ArrayList<>();
+        		
+        		JsonArray jsonArr = obj.get("images").getAsJsonArray();
+        		for(int i = 0; i < jsonArr.size(); i++) {
+        			
+        			//get encoded image
+        			String encoded = jsonArr.get(i).getAsString();
+        			
+        			//get image path to create)
+        			String path = "probes/" + i + ".jpg";
+        			
+        			//saves the image
+            		fromBase64ToImage(encoded, path);
+            		
+            		//add the image to the list to be deleted
+            		toDelete.add(new File(path));
+            		
+        		}
+        		
+        		//run face recognition
+        		Process p = Runtime.getRuntime()
+        				.exec(SHELL_COMMAND);
+        		
+        		p.waitFor();  // wait for process to finish then continue.
+
+        		BufferedReader bri = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+        		String output = "";
+        		String line = "";
+        		while ((line = bri.readLine()) != null) {
+        		    output+=line;
+        		}
+        		
+        		//deletes the images
+        		for(File f : toDelete) f.delete();
+        		
+        		JSONObject outobj = new JSONObject();
+        		outobj.put("username", output);
+        		User u = UsersBLL.getUser(output);
+        		int score = 0;
+        		if(u != null) score = u.getScore();
+        		outobj.put("score", score);
+        		return outobj;
         	}
         	else {
         		res.status(HttpStatus.BAD_REQUEST_400);

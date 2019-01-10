@@ -23,3 +23,5 @@
 2019/01/10 14:24:55.938 Info   TimerInit: Initializing timer with x1 speed mode (interval = 16 msec)
 2019/01/10 15:15:47.910 Error  Accesso negato.
  (Utils\Utils.cpp#479)
+2019/01/10 16:11:42.066 Error  Accesso negato.
+ (Utils\Utils.cpp#479)
