@@ -12,8 +12,15 @@ public class HighScoreRequest {
 	}
 	
 	public HighScoreRequest() {
-		this.newScore = newScore;
-		this.username = username;
+
+	}
+
+	public int getNewScore() {
+		return newScore;
+	}
+
+	public String getUsername() {
+		return username;
 	}
 	
 	
