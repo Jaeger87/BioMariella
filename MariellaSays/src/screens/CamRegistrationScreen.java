@@ -20,6 +20,7 @@ public class CamRegistrationScreen implements PScreen, Callback{
 	private long nextphoto = 0;
 	int i = 0;
 	private DetectionAndSendFace det;
+	int intReg = 0;
 	
 	
 	
@@ -42,16 +43,18 @@ public class CamRegistrationScreen implements PScreen, Callback{
 		
 		parent.set(-140, 20, cam);
 		
-		
+		System.out.println(intReg);
+		intReg++;
 		
 		if(flag)
 		{
+			System.out.println("ciao");
 			if(parent.millis()>nextphoto) {
 				nextphoto = parent.millis() + 1000;
 				cam.save("photos/"+nickname+"/"+i+".jpg");
 				i++;
 			}
-			if(i>=5) {
+			if(i>=10) {
 				flag=false;
 				det = new DetectionAndSendFace(this, nickname);
 				RunnerConsumer.getRunnerConsumer().consumeRunner(det);
