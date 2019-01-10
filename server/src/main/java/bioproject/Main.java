@@ -89,6 +89,7 @@ public class Main {
         		return new Gson().toJson("Json file expected.");
         	}
         	JsonObject obj = json.getAsJsonObject();
+        	System.out.println(obj.toString());
         	if(obj.has("username") && obj.has("newScore")) {
         		String username = obj.get("username").getAsString();
         		int newScore = obj.get("newScore").getAsInt();
@@ -153,7 +154,7 @@ public class Main {
         		int score = 0;
         		if(u != null) score = u.getScore();
         		outobj.put("score", score);
-        		return new Gson().toJson(outobj.toString());
+        		return outobj;
         	}
         	else {
         		res.status(HttpStatus.BAD_REQUEST_400);

@@ -42,6 +42,7 @@ public abstract class AbstractCallToServer extends AbstractRunAndCall{
 		
 		Gson gson = new Gson();
 		
+		System.out.println(gson.toJson(bodyToSend));
         body = RequestBody.create(JSON, gson.toJson(bodyToSend));
        
         Request request = null;
