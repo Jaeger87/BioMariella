@@ -2,13 +2,15 @@ package apicalls;
 
 import java.util.List;
 
+import java.lang.reflect.Type;
+
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import apiengine.APITypes;
 import apiengine.AbstractCallToServer;
 import apiengine.Callback;
 import apimodel.HighScoreEntry;
-import apimodel.Ranking;
 import processing.MariellaSaysMain;
 
 public class RankingAPI extends AbstractCallToServer{
@@ -26,16 +28,12 @@ public class RankingAPI extends AbstractCallToServer{
 		Gson gson = new Gson();
 		MariellaSaysMain.println(json);
 		
-		Ranking ranking = gson.fromJson(json, Ranking.class);
+		Type containerType = new TypeToken<List<HighScoreEntry>>(){}.getType();
 		
-		if(ranking != null)
-		{
+		highScores = gson.fromJson(json, containerType);
 		
-			highScores = ranking.getRanking();
-		
-			if(highScores.size() > 10)
+		if(highScores.size() > 10)
 			highScores = highScores.subList(0, 10);
-		}
 	}
 
 	public List<HighScoreEntry> getHighScores() {

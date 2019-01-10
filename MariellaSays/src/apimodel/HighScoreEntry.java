@@ -3,7 +3,7 @@ package apimodel;
 public class HighScoreEntry {
 
 	private int score;
-	private String userName;
+	private String nickname;
 	
 
 	public HighScoreEntry() {
@@ -13,7 +13,7 @@ public class HighScoreEntry {
 	
 	public HighScoreEntry(int score, String nickname) {
 		this.score = score;
-		this.userName = nickname;
+		this.nickname = nickname;
 	}
 
 	public int getScore() {
@@ -21,14 +21,14 @@ public class HighScoreEntry {
 	}
 
 	public String getNickname() {
-		return userName;
+		return nickname;
 	}
 
 
 
 	@Override
 	public String toString() {
-		return userName + ":" + score;
+		return nickname + ":" + score;
 	}
 	
 }
