@@ -85,6 +85,8 @@ public class MariellaSaysMain extends PApplet implements Callback{
 	}
 
 	public void keyReleased() {
+		if((this.key == 'S' || this.key == 's') && currentScreen != registrationScreen)
+			saveFrame("screenshots/" + System.currentTimeMillis() + ".png");
 		currentScreen.keyReleased();
 	}
 
