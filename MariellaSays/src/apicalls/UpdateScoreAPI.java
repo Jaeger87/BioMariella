@@ -22,8 +22,7 @@ public class UpdateScoreAPI extends AbstractCallToServer{
 	
 	@Override
 	protected void parseData(String json) {
-		if(json.contains("Score"))
-			ok = true;
+		ok = true;
 		MariellaSaysMain.println(json);
 	}
 
