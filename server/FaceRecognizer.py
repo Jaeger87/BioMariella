@@ -31,7 +31,7 @@ with open("labels.pickle", 'rb') as f:
 frame = cv2.imread(path, 1)
 
 gray  = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) # for template matching we need grayscale
-faces = face_cascade.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=5)
+faces = face_cascade.detectMultiScale(gray, scaleFactor=1.05, minNeighbors=3)
 for (x, y, w, h) in faces:
 	roi_gray = gray[y:y+h, x:x+w] 
 	roi_color = frame[y:y+h, x:x+w]
@@ -45,6 +45,6 @@ for (x, y, w, h) in faces:
 	#a detected face must have at least 2 eyes
 	if flagEyes >= 2:
 		id_, theta = recognizer.predict(roi_gray)
-		if theta <= 55 :
+		if theta <= 50 :
 			name = labels[id_]
 			print(name)

@@ -23,6 +23,9 @@ import bioproject.types.User;
 public class Main {
 	
 	private static String SHELL_COMMAND = 
+			"python FaceRecognizer.py probes/probe.jpg";
+	
+	private static String SHELL_COMMAND2 = 
 			"python FaceRecMul.py";
 	
     public static void main(String[] args) 
@@ -48,6 +51,10 @@ public class Main {
         			return new Gson().toJson("Nickname already used");
         		}
         		JsonArray encodedfiles = obj.get("images").getAsJsonArray();
+        		if(encodedfiles.size() == 0) {
+        			res.status(HttpStatus.PRECONDITION_FAILED_412);
+        			return new Gson().toJson("No ROI images detected");
+        		}
         		if(UsersBLL.insertUser(username))
         		{
         			//adjourning the gallery with the new user
@@ -196,7 +203,7 @@ public class Main {
         		
         		//run face recognition
         		Process p = Runtime.getRuntime()
-        				.exec(SHELL_COMMAND);
+        				.exec(SHELL_COMMAND2);
         		
         		p.waitFor();  // wait for process to finish then continue.
 
@@ -209,7 +216,9 @@ public class Main {
         		}
         		
         		//deletes the images
-        		for(File f : toDelete) f.delete();
+        		for(File f : toDelete) {
+        			if(f.exists()) f.delete();
+        		}
         		
         		JSONObject outobj = new JSONObject();
         		outobj.put("username", output);
