@@ -96,7 +96,6 @@ public class Main {
         		return new Gson().toJson("Json file expected.");
         	}
         	JsonObject obj = json.getAsJsonObject();
-        	System.out.println(obj.toString());
         	if(obj.has("username") && obj.has("newScore")) {
         		String username = obj.get("username").getAsString();
         		int newScore = obj.get("newScore").getAsInt();
