@@ -73,14 +73,16 @@ public class LogInCall extends AbstractRunAndCall{
 			String responseString = EntityUtils.toString(entity);
 		
 			//creating the user istance
-			Gson gson = new Gson();
-			loggedUser = gson.fromJson(gson.toJson(responseString), UserProfile.class);
 			
-			System.out.println("The identified user is " 
-			+ loggedUser.getUsername() + " and his score is " 
-			+ loggedUser.getScore());
+			if(!responseString.equals(""))
+			{
+				Gson gson = new Gson();
+				loggedUser = gson.fromJson(gson.toJson(responseString), UserProfile.class);
 			
-			
+				System.out.println("The identified user is " 
+					+ loggedUser.getUsername() + " and his score is " 
+				+ loggedUser.getScore());
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
