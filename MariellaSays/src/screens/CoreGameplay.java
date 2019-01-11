@@ -156,10 +156,11 @@ public class CoreGameplay implements PScreen, Callback{
 			{
 				updateScoreAPI = new UpdateScoreAPI(this, mariella.getScore(), up.getUsername());
 				RunnerConsumer.getRunnerConsumer().consumeRunner(updateScoreAPI);
+				up = null;
 			}
+			else
+				parent.gameOver(up);
 			
-			parent.gameOver(up);
-			up = null;
 			break;
 			
 		case SPARAFLASH:
@@ -251,7 +252,7 @@ public class CoreGameplay implements PScreen, Callback{
 
 	@Override
 	public void callback() {
-		// TODO Auto-generated method stub
+		parent.gameOver(up);
 		
 	}
 	

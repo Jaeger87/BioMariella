@@ -80,7 +80,9 @@ public class LogInCall extends AbstractRunAndCall{
 			
 			//creating the user istance
 			Gson gson = new Gson();
-			loggedUser = gson.fromJson(jobj.toString(), UserProfile.class);
+			loggedUser = gson.fromJson(gson.toJson(jobj), UserProfile.class);
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
