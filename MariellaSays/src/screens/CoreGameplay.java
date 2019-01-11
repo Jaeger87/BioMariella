@@ -43,6 +43,8 @@ public class CoreGameplay implements PScreen, Callback{
     
     private UpdateScoreAPI updateScoreAPI;
     
+    private boolean gameOver = false;
+    
 	public CoreGameplay(MariellaSaysMain parent, SerialContainer arduino) {
 		super();
 		this.parent = parent;
@@ -78,6 +80,8 @@ public class CoreGameplay implements PScreen, Callback{
     	pauseSays = false;
     	
     	listenIndex = 0;
+    	
+    	gameOver = false;
     	
 	}
 
@@ -158,7 +162,9 @@ public class CoreGameplay implements PScreen, Callback{
 				RunnerConsumer.getRunnerConsumer().consumeRunner(updateScoreAPI);
 				up = null;
 			}
-			else
+			
+			
+			if(gameOver)
 				parent.gameOver(up);
 			
 			break;
@@ -252,7 +258,7 @@ public class CoreGameplay implements PScreen, Callback{
 
 	@Override
 	public void callback() {
-		parent.gameOver(up);
+		gameOver = true;
 		
 	}
 	

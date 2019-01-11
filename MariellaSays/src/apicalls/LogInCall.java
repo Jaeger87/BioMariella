@@ -71,16 +71,14 @@ public class LogInCall extends AbstractRunAndCall{
 			HttpResponse response = httpClient.execute(request);
 			HttpEntity entity = response.getEntity();
 			String responseString = EntityUtils.toString(entity);
-
-			//print the username
-			JSONObject jobj = new JSONObject(responseString);
-			System.out.println("The identified user is " 
-			+ jobj.getString("username") + " and his score is " 
-			+ jobj.getInt("score"));
-			
+		
 			//creating the user istance
 			Gson gson = new Gson();
-			loggedUser = gson.fromJson(gson.toJson(jobj), UserProfile.class);
+			loggedUser = gson.fromJson(gson.toJson(responseString), UserProfile.class);
+			
+			System.out.println("The identified user is " 
+			+ loggedUser.getUsername() + " and his score is " 
+			+ loggedUser.getScore());
 			
 			
 			
