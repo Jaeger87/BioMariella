@@ -113,7 +113,11 @@ public class DetectionAndSendFace extends AbstractRunAndCall {
 				}
 		        
 		      //delete all the images
-				for(File f : images) f.delete();
+				for(File f : images)
+					if (f.exists())
+						f.delete();
+					
+					
 		        
 	}
 

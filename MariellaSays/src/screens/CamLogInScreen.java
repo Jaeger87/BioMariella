@@ -15,8 +15,11 @@ public class CamLogInScreen implements PScreen, Callback{
 	private MariellaSaysMain parent;
 	private SerialContainer arduino;
 	private boolean startPressed = false;
-	private static final String loginPath = "photos/login.jpg";
+	private static final String loginPath = "photos/login";
 	private LogInCall logincall;
+	private long nextphoto = 0;
+	private int photoIndex = 0;
+	private boolean photoFlag= false;
 	
 	public CamLogInScreen(MariellaSaysMain parent, Capture cam, SerialContainer arduino) {
 		this.cam = cam;
@@ -27,6 +30,10 @@ public class CamLogInScreen implements PScreen, Callback{
 	@Override
 	public void setup() {
 		arduino.write('W');
+		
+		nextphoto = 0;
+		photoIndex = 0;
+		photoFlag= false;
 		
 	}
 
@@ -42,7 +49,20 @@ public class CamLogInScreen implements PScreen, Callback{
 		
 		  parent.set(-140, 20, cam);
 		  
-		  
+			if(photoFlag)
+			{
+				if(parent.millis()>nextphoto) {
+					nextphoto = parent.millis() + 1000;
+					cam.save(loginPath + photoIndex +".jpg");
+					photoIndex++;
+				}
+				if(photoIndex>=5) {
+					photoFlag=false;
+					logincall = new LogInCall(this, loginPath);
+					RunnerConsumer.getRunnerConsumer().consumeRunner(logincall);
+					
+				}
+			}
 		
 	}
 
@@ -64,9 +84,13 @@ public class CamLogInScreen implements PScreen, Callback{
 		
 		if (parent.key == 'A' || parent.key == 'a')
 		{
-			cam.save(loginPath);
-			logincall = new LogInCall(this, loginPath);
-			RunnerConsumer.getRunnerConsumer().consumeRunner(logincall);
+			photoIndex = 0;
+			nextphoto = parent.millis()+1000;
+			photoFlag = true;
+			
+			
+			//cam.save(loginPath);
+			
 		}
 		
 	}
