@@ -48,6 +48,10 @@ public class CamLogInScreen implements PScreen, Callback{
 		  // resizing, transformations, or tint.
 		
 		  parent.set(-140, 20, cam);
+		  parent.noFill();
+		  parent.strokeWeight(4);
+		  parent.ellipse(600, parent.height/2, 300, 700);
+		  
 		  
 			if(photoFlag)
 			{
