@@ -47,26 +47,28 @@ public class CamLogInScreen implements PScreen, Callback{
 		  // is faster when just drawing the image without any additional 
 		  // resizing, transformations, or tint.
 		
-		  parent.set(-140, 20, cam);
-		  parent.noFill();
-		  parent.strokeWeight(4);
-		  parent.ellipse(600, parent.height/2, 300, 700);
+		
+		//parent.println("" + parent.mouseX + "  " + parent.mouseY);
+		parent.set(-140, 20, cam);
 		  
+		parent.camGraphicsInterface();
 		  
-			if(photoFlag)
-			{
-				if(parent.millis()>nextphoto) {
-					nextphoto = parent.millis() + 1000;
-					cam.save(loginPath + photoIndex +".jpg");
-					photoIndex++;
-				}
-				if(photoIndex>=5) {
-					photoFlag=false;
-					logincall = new LogInCall(this, loginPath);
-					RunnerConsumer.getRunnerConsumer().consumeRunner(logincall);
-					
-				}
+		if(photoFlag)
+		{
+			if(parent.millis()>nextphoto) {
+				nextphoto = parent.millis() + 1000;
+				cam.save(loginPath + photoIndex +".jpg");
+				photoIndex++;
 			}
+			if(photoIndex>=5) {
+				photoFlag=false;
+				logincall = new LogInCall(this, loginPath);
+				RunnerConsumer.getRunnerConsumer().consumeRunner(logincall);
+					
+			}
+		}
+			
+		
 		
 	}
 

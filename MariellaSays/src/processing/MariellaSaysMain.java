@@ -180,6 +180,28 @@ public class MariellaSaysMain extends PApplet implements Callback{
 		return currentScreen instanceof CamLogInScreen;
 	}
 
-	
+	public void camGraphicsInterface()
+	{
+		stroke(39);
+		fill(color(190, 5, 5));
+		textSize(33);
+		text("Center your face inside the ellipse,\n than press A", 10, 50);
+		  
+		strokeWeight(3);
+		
+		stroke(10);
+		fill(color(220,0, 0));
+		ellipse(144,87, 25, 25);
+		
+		noFill();
+		  
+		stroke(39);
+		strokeWeight(8);
+		ellipse(width / 2, height/2, 410, 700);
+		  
+		
+		stroke(1);
+		strokeWeight(1);
+	}
 	
 }

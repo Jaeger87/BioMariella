@@ -42,7 +42,7 @@ public class CamRegistrationScreen implements PScreen, Callback{
 		
 		parent.set(-140, 20, cam);
 		
-	
+		parent.camGraphicsInterface();
 		
 		if(flag)
 		{
