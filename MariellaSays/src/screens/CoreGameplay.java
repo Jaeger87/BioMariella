@@ -222,7 +222,6 @@ public class CoreGameplay implements PScreen, Callback{
         parent.fill(10);
         parent.text(mariella.getScore(), parent.width/2 - 50, parent.height / 10);
         
-        up = new UserProfile("jaeger", 20);
         if(up != null)
         {
         	parent.textSize(50);
