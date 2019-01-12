@@ -25,7 +25,7 @@ import apimodel.UserProfile;
 public class LogInCall extends AbstractRunAndCall{
 	
 	
-	private static String LOCAL_URI = "http://localhost:4567/authentication";
+	private static String LOCAL_URI = "http://localhost:4567/multiauth";
 	private UserProfile loggedUser;
 	private String basePath;
 
@@ -47,7 +47,7 @@ public class LogInCall extends AbstractRunAndCall{
 		//loading the sample image
 		
 		List<File> images = new ArrayList<>();
-		int i = 1;
+		int i = 0;
 		do {
 			File image = new File(basePath + i +".jpg");
 			if(!image.exists()) break;

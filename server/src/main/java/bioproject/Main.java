@@ -215,6 +215,7 @@ public class Main {
         		}
         		
         		//deletes the images
+        		
         		for(File f : toDelete) {
         			if(f.exists()) f.delete();
         		}
