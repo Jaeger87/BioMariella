@@ -211,6 +211,8 @@ public class CoreGameplay implements PScreen, Callback{
         parent.text("A", 684, 323);
         parent.text("X", 628, 210);
         
+
+        
     }
 	
     
@@ -219,6 +221,13 @@ public class CoreGameplay implements PScreen, Callback{
         parent.textSize(65);
         parent.fill(10);
         parent.text(mariella.getScore(), parent.width/2 - 50, parent.height / 10);
+        
+        up = new UserProfile("jaeger", 20);
+        if(up != null)
+        {
+        	parent.textSize(50);
+        	parent.text(up.getUsername() + "\nBest score: " + up.getScore(), 50, 600);
+        }
     }
 	
 	
