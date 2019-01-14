@@ -158,9 +158,14 @@ public class CoreGameplay implements PScreen, Callback{
 		case GAMEOVER:
 			if(up != null)
 			{
-				updateScoreAPI = new UpdateScoreAPI(this, mariella.getScore(), up.getUsername());
-				RunnerConsumer.getRunnerConsumer().consumeRunner(updateScoreAPI);
-				up = null;
+				if(up.getUsername().equals("Unknow Player"))
+					gameOver = true;
+				else
+				{
+					updateScoreAPI = new UpdateScoreAPI(this, mariella.getScore(), up.getUsername());
+					RunnerConsumer.getRunnerConsumer().consumeRunner(updateScoreAPI);
+					up = null;
+				}
 			}
 			
 			

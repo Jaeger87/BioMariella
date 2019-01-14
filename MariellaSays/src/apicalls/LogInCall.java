@@ -99,6 +99,10 @@ public class LogInCall extends AbstractRunAndCall{
 				System.out.println("The identified user is " 
 					+ loggedUser.getUsername() + " and his score is " 
 				+ loggedUser.getScore());
+				
+				
+				if(loggedUser.getUsername().equals(""))
+					loggedUser.setUsername("Unknow Player");
 			}
 			
 		} catch (Exception e) {
