@@ -102,7 +102,7 @@ public class LogInCall extends AbstractRunAndCall{
 				
 				
 				if(loggedUser.getUsername().equals(""))
-					loggedUser.setUsername("Unknow Player");
+					loggedUser.setUsername("Unknown Player");
 			}
 			
 		} catch (Exception e) {

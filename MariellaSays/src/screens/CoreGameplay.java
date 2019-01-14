@@ -70,7 +70,6 @@ public class CoreGameplay implements PScreen, Callback{
     			parent.color(160,160,0), 402, 457, 'B', 'Y'));//giallo
     	
     	mariella = new Mariella();
-    	MariellaSaysMain.println("ok setup");
     	
     	coreStatus = CoreGameplaystatus.THINK;
     	
@@ -158,7 +157,7 @@ public class CoreGameplay implements PScreen, Callback{
 		case GAMEOVER:
 			if(up != null)
 			{
-				if(up.getUsername().equals("Unknow Player"))
+				if(up.getUsername().equals("Unknown Player"))
 					gameOver = true;
 				else
 				{
