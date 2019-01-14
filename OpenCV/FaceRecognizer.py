@@ -47,6 +47,6 @@ for (x, y, w, h) in faces:
 		id_, theta = recognizer.predict(roi_gray)
 
 		#chosen threshold
-		if theta<= 50:
+		if theta<= 60:
 			name = labels[id_]
 			print(name)

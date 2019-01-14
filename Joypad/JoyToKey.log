@@ -1,42 +1,24 @@
-2019/01/10 14:24:55.119 Info   C:\Users\Sergio\Documents\bioproject-repo\BioMariella\Joypad\JoyToKey.exe
-2019/01/10 14:24:55.119 Info   Starting JoyToKey Ver6.1.1
-2019/01/10 14:24:55.119 Info   ExeFile=C:\Users\Sergio\Documents\bioproject-repo\BioMariella\Joypad\JoyToKey.exe
-2019/01/10 14:24:55.119 Info   ConfigDir=C:\Users\Sergio\Documents\bioproject-repo\BioMariella\Joypad\
-2019/01/10 14:24:55.119 Info   IniFile=C:\Users\Sergio\Documents\bioproject-repo\BioMariella\Joypad\JoyToKey.ini
-2019/01/10 14:24:55.119 Info   Windows Version = 6.2
-2019/01/10 14:24:55.122 Info   Loaded VistaAPI.dll (Utils\Utils.cpp#232)
-2019/01/10 14:24:55.131 Info   LicenseKey "" is not valid
-2019/01/10 14:24:55.820 Info   Loading XInput1_3.dll (Joystick.cpp#128)
-2019/01/10 14:24:55.823 Info   Initialized XInput (Joystick.cpp#146)
-2019/01/10 14:24:55.880 Info   Detected a DI joystick: {B4084A20-1295-11E9-8001-444553540000}, usb gamepad           , usb gamepad           
-2019/01/10 14:24:55.880 Info   Preferred index = -1
-2019/01/10 14:24:55.881 Info   numAxis = 2
-2019/01/10 14:24:55.881 Info   numPOVs = 0
-2019/01/10 14:24:55.881 Info   numButtons = 10
-2019/01/10 14:24:55.881 Info   EnumDeviceObject: Axis offset=0 type=102 name=Asse Y
-2019/01/10 14:24:55.881 Info   EnumDeviceObject: Axis offset=4 type=2 name=Asse X
-2019/01/10 14:24:55.881 Info   DetectJoysticks: Detected 1 DI joystick(s)
-2019/01/10 14:24:55.883 Info   Joystick #1: usb gamepad
-2019/01/10 14:24:55.883 Info   1 joysticks are detected (Joystick.cpp#168)
-2019/01/10 14:24:55.883 Info   ConfigDir=C:\Users\Sergio\Documents\bioproject-repo\BioMariella\Joypad\*.cfg (ConfigFileManager.cpp#43)
-2019/01/10 14:24:55.921 Info   Failed to find AppLink.dat (AppLink\AppLinkManager.cpp#32)
-2019/01/10 14:24:55.938 Info   TimerInit: Initializing timer with x1 speed mode (interval = 16 msec)
-2019/01/10 15:15:47.910 Error  Accesso negato.
- (Utils\Utils.cpp#479)
-2019/01/10 16:11:42.066 Error  Accesso negato.
- (Utils\Utils.cpp#479)
-2019/01/10 17:37:28.611 Error  Accesso negato.
- (Utils\Utils.cpp#479)
-2019/01/10 17:38:33.282 Error  Accesso negato.
- (Utils\Utils.cpp#479)
-2019/01/10 17:41:31.634 Error  Accesso negato.
- (Utils\Utils.cpp#479)
-2019/01/10 17:41:35.618 Error  Accesso negato.
- (Utils\Utils.cpp#479)
-2019/01/10 17:41:52.034 Error  Accesso negato.
- (Utils\Utils.cpp#479)
-2019/01/10 18:47:35.250 Error  Accesso negato.
- (Utils\Utils.cpp#479)
-2019/01/10 18:47:35.986 Error  Accesso negato.
- (Utils\Utils.cpp#479)
-2019/01/10 18:47:41.765 Info   Application terminated (Utils\LogFile.cpp#20)
+2019/01/14 16:29:34.845 Info   C:\Users\Sergio\Documents\bioproject-repo\BioMariella\Joypad\JoyToKey.exe
+2019/01/14 16:29:34.845 Info   Starting JoyToKey Ver6.1.1
+2019/01/14 16:29:34.845 Info   ExeFile=C:\Users\Sergio\Documents\bioproject-repo\BioMariella\Joypad\JoyToKey.exe
+2019/01/14 16:29:34.845 Info   ConfigDir=C:\Users\Sergio\Documents\bioproject-repo\BioMariella\Joypad\
+2019/01/14 16:29:34.845 Info   IniFile=C:\Users\Sergio\Documents\bioproject-repo\BioMariella\Joypad\JoyToKey.ini
+2019/01/14 16:29:34.845 Info   Windows Version = 6.2
+2019/01/14 16:29:34.845 Info   Loaded VistaAPI.dll (Utils\Utils.cpp#232)
+2019/01/14 16:29:34.861 Info   LicenseKey "" is not valid
+2019/01/14 16:29:35.254 Info   Loading XInput1_3.dll (Joystick.cpp#128)
+2019/01/14 16:29:35.254 Info   Initialized XInput (Joystick.cpp#146)
+2019/01/14 16:29:35.349 Info   Detected a DI joystick: {B4084A20-1295-11E9-8001-444553540000}, usb gamepad           , usb gamepad           
+2019/01/14 16:29:35.349 Info   Preferred index = -1
+2019/01/14 16:29:35.349 Info   numAxis = 2
+2019/01/14 16:29:35.349 Info   numPOVs = 0
+2019/01/14 16:29:35.349 Info   numButtons = 10
+2019/01/14 16:29:35.349 Info   EnumDeviceObject: Axis offset=0 type=102 name=Asse Y
+2019/01/14 16:29:35.349 Info   EnumDeviceObject: Axis offset=4 type=2 name=Asse X
+2019/01/14 16:29:35.380 Info   DetectJoysticks: Detected 1 DI joystick(s)
+2019/01/14 16:29:35.380 Info   Joystick #1: usb gamepad
+2019/01/14 16:29:35.380 Info   1 joysticks are detected (Joystick.cpp#168)
+2019/01/14 16:29:35.380 Info   ConfigDir=C:\Users\Sergio\Documents\bioproject-repo\BioMariella\Joypad\*.cfg (ConfigFileManager.cpp#43)
+2019/01/14 16:29:35.411 Info   Failed to find AppLink.dat (AppLink\AppLinkManager.cpp#32)
+2019/01/14 16:29:35.427 Info   TimerInit: Initializing timer with x1 speed mode (interval = 16 msec)
+2019/01/14 16:44:38.791 Info   Application terminated (Utils\LogFile.cpp#20)

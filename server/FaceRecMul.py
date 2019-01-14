@@ -46,7 +46,7 @@ for root, dirs, files in os.walk(DirName):
                     id_, theta = recognizer.predict(roi_gray)
 
                     #chosen threshold = 0.5
-                    if theta<= 50:
+                    if theta<= 60:
                         name = labels[id_]
                         if name in listName:
                             listName[name]+=1
