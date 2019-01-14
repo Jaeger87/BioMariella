@@ -44,8 +44,6 @@ for root, dirs, files in os.walk(DirName):
                 #a detected face must have at least 2 eyes
                 if flagEyes >= 2:
                     id_, theta = recognizer.predict(roi_gray)
-
-                    #chosen threshold = 0.5
                     if theta<= 60:
                         name = labels[id_]
                         if name in listName:
